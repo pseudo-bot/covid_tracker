@@ -28,8 +28,18 @@ a {
 	height: 80px;
 	position: absolute;
 	background-image: linear-gradient(to right, #ddd, #fff);
-	font-size: 2.3em;
 	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.logo {
+	font-size: 4rem;
+	letter-spacing: 0.2rem;
+	font-family: 'Montserrat', sans-serif;
+	color: rgb(4, 104, 255);
+	font-weight: 600;
 }
 
 .navbar__items {
@@ -37,14 +47,13 @@ a {
 	list-style-type: none;
 	color: $text_color;
 	cursor: pointer;
-	position: absolute;
-	right: 10vw;
+	position: relative;
+	font-size: 2em;
 
 	li {
 		width: 8em;
 		text-align: center;
 		padding: 0.6em 2em;
-		margin-top: 10px;
 		border-radius: 100vw;
 		position: relative;
 		text-transform: uppercase;
@@ -52,7 +61,7 @@ a {
 
 	li a {
 		position: relative;
-		font-weight: 600;
+		font-weight: 500;
 		letter-spacing: 0.1rem;
 		color: rgb(2, 112, 214);
 	}
@@ -144,7 +153,7 @@ a {
 
 // Input Form
 
-.form {
+.form__country {
 	position: relative;
 	display: inline-block;
 	top: 30vh;
@@ -237,20 +246,23 @@ a {
 }
 
 #particles-js {
+	position: absolute;
 	height: 45%;
 	width: 45%;
 }
 
 // Responsiveness
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
 	.navbar__items {
+		position: absolute;
 		flex-direction: column;
-		height: 92vh;
-		width: 350px;
-		background-image: linear-gradient(to top, #ddd, #eee);
-		top: 100%;
+		top: 80px;
 		right: 0;
+		height: 92vh;
+		width: 40vw;
+		z-index: inherit;
+		background-image: linear-gradient(to top, #ddd, #eee);
 		align-items: center;
 		justify-content: space-evenly;
 		transform: translateX(100%);

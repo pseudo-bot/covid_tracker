@@ -31,6 +31,6 @@ async function data() {
 	}
 })();
 
-fetch("https://geolocation-db.com/json/ef6c41a0-9d3c-11eb-8f3b-e1f5536499e7/ipv6", {
-	mode: 'no-cors'
-}).then(res => console.log(res))
+fetch('https://api.covid19api.com/countries')
+.then(resolve => resolve.json())
+.then(data => console.log(data))

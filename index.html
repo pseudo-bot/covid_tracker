@@ -21,6 +21,10 @@
 	</head>
 	<body>
 		<nav class="navbar">
+			<div class="logo">
+				COVID TRACKER
+			</div>
+
 			<ul class="navbar__items">
 				<li><a href="#">Home</a></li>
 				<li><a href="#">About</a></li>
@@ -37,25 +41,26 @@
 
 		<div class="heading">Covid Tracker</div>
 
-		<div class="form form--country">
-			<input
-				type="text"
-				name="country"
-				class="input--country input"
-				autocomplete="off"
-				list="country"
-				required
-			/>
-			<label for="country">
-				<span class="label-content">Country</span>
-			</label>
-			<datalist id="country"> </datalist>
-		</div>
-
-		<div class="particle_animation">
-			<div id="particles-js"></div>
-			<script src="particle/particles.js"></script>
-			<script src="particle/app.js"></script>
+		<div class="form">
+			<div class="form__country">
+				<input
+					type="text"
+					name="country"
+					class="input--country input"
+					autocomplete="off"
+					list="country"
+					required
+				/>
+				<label for="country">
+					<span class="label-content">Country</span>
+				</label>
+				<datalist id="country"> </datalist>
+			</div>
+			<div class="particle_animation">
+				<div id="particles-js"></div>
+				<script src="particle/particles.js"></script>
+				<script src="particle/app.js"></script>
+			</div>
 		</div>
 
 		<script src="main.js"></script>
