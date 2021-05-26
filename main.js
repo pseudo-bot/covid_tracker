@@ -33,3 +33,4 @@ async function data() {
 
 fetch("https://geolocation-db.com/json")
       .then(res => console.log(res))
+	  .catch(() => console.log("Error occured"))
