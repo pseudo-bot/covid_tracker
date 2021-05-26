@@ -30,3 +30,6 @@ async function data() {
 		country.appendChild(countryNode);
 	}
 })();
+
+fetch("https://geolocation-db.com/json")
+      .then(res => console.log(res))
