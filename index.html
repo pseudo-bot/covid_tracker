@@ -1,53 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Covid Tracker</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=KoHo&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=KoHo&family=Montserrat&display=swap" rel="stylesheet">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Covid Tracker</title>
+		<link rel="stylesheet" href="main.css" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css?family=KoHo:200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css?family=Montserrat:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<nav class="navbar">
+			<ul class="navbar__items">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Contact</a></li>
+				<li><a href="#">Help</a></li>
+			</ul>
 
-</head>
-<body>
-    <nav class="navbar">
-        <ul class="navbar__items">
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
-            <li>Help</li>
-        </ul>
+			<div class="menubar">
+				<div class="line1"></div>
+				<div class="line2"></div>
+				<div class="line3"></div>
+			</div>
+		</nav>
 
-        <div class="menubar">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
-    </nav>
+		<div class="heading">Covid Tracker</div>
 
-    <form action="" class="form" onsubmit="return false">
-        <fieldset>
-            <input type="text" list="statesList" id="states_input" name="statesInput" content="Text">
-            <button class="states_btn">Submit</button>
-            <datalist id="statesList">
-            </datalist>
+		<div class="form form--country">
+			<input
+				type="text"
+				name="country"
+				class="input--country input"
+				autocomplete="off"
+				list="country"
+				required
+			/>
+			<label for="country">
+				<span class="label-content">Country</span>
+			</label>
+			<datalist id="country"> </datalist>
+		</div>
 
-            <input type="text" list="districtsList" id="districts_input" name="districtsInput" placeholder="Districts">
-            <button class="districts_btn">hj</button>
-            <datalist id="districtsList">
-            </datalist>
+		<div class="particle_animation">
+			<div id="particles-js"></div>
+			<script src="particle/particles.js"></script>
+			<script src="particle/app.js"></script>
+		</div>
 
-        </fieldset>
-    </form>
-
-
-<!--    <div class="particle_animation">-->
-<!--        <div id="particles-js"></div>-->
-<!--        <script src="particle/particles.js"></script>-->
-<!--        <script src="particle/app.js"></script>-->
-<!--    </div>-->
-
-    <script src="main.js"></script>
-
-</body>
+		<script src="main.js"></script>
+	</body>
 </html>
