@@ -7,6 +7,8 @@
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -76,8 +78,8 @@ a {
   border-radius: 100vw;
   width: 0;
   height: 3px;
-  background-image: -webkit-gradient(linear, right top, left top, from(#64b5f7), to(#3512fd));
-  background-image: linear-gradient(to left, #64b5f7, #3512fd);
+  background-image: -webkit-gradient(linear, left top, right top, from(#a01ef7), to(#0675f3));
+  background-image: linear-gradient(to right, #a01ef7, #0675f3);
   left: -10px;
   bottom: -5px;
   -webkit-transition: all 0.4s ease;
@@ -90,8 +92,8 @@ a {
   border-radius: 100vw;
   width: 3px;
   height: 0;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#64b5f7), to(#3512fd));
-  background-image: linear-gradient(#64b5f7, #3512fd);
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#a01ef7), to(#0675f3));
+  background-image: linear-gradient(to top, #a01ef7, #0675f3);
   left: -10px;
   bottom: -5px;
   -webkit-transition: all 0.4s ease;
@@ -151,6 +153,7 @@ a {
 }
 
 .heading {
+  font-family: 'Poppins';
   font-size: 7em;
   position: relative;
   top: 15vh;
@@ -158,20 +161,32 @@ a {
   color: #1e33ec;
 }
 
-.form__country {
+.form_section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   position: relative;
-  display: inline-block;
-  top: 30vh;
-  left: 50vw;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  max-width: 30vw;
-  min-width: 250px;
-  height: 80px;
-  overflow: hidden;
+  height: 50vh;
+  width: 50vw;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-line-pack: distribute;
+      align-content: space-around;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  top: 15vh;
 }
 
-.form__country .input {
+.form {
+  height: 80px;
+  overflow: hidden;
+  position: relative;
+}
+
+.form .input {
   width: 100%;
   height: 100%;
   padding-top: 20px;
@@ -183,7 +198,7 @@ a {
   font-weight: 500;
 }
 
-.form__country label {
+.form label {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -194,7 +209,7 @@ a {
   color: #666;
 }
 
-.form__country label::after {
+.form label::after {
   content: "";
   position: absolute;
   left: 0;
@@ -205,7 +220,7 @@ a {
           transform: translateX(-100%);
 }
 
-.form__country .label-content {
+.form .label-content {
   font-size: 2.2rem;
   position: absolute;
   bottom: 5px;
@@ -213,50 +228,61 @@ a {
   transition: all 0.3s ease-out;
 }
 
-.form__country input:focus + label .label-content {
+.form input:focus + label .label-content {
   font-size: 1.7rem;
   top: 0;
 }
 
-.form__country input:focus + label::after {
+.form input:focus + label::after {
   -webkit-transform: translateX(0%);
           transform: translateX(0%);
   -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
 
-.form__country input:valid + label .label-content {
+.form input:valid + label .label-content {
   font-size: 1.7rem;
   top: 0;
 }
 
-.form__country input:valid + label::after {
+.form input:valid + label::after {
   -webkit-transform: translateX(0%);
           transform: translateX(0%);
   -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
 
-.form__country input:invalid + label::after {
+.form input:invalid + label::after {
   border-color: #f54343;
   -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
 
-.particle_animation {
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
+.track-btn {
+  font-size: 3rem;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  color: #fff;
+  width: 200px;
   display: -ms-grid;
   display: grid;
   place-items: center;
-  z-index: -1;
+  padding: 10px;
+  height: 60px;
+  align-self: flex-end;
+  background-image: -webkit-gradient(linear, left top, right top, from(#a01ef7), to(#0675f3));
+  background-image: linear-gradient(to right, #a01ef7, #0675f3);
+  border-radius: 100vw;
+  cursor: pointer;
 }
 
 #particles-js {
   position: absolute;
   height: 45%;
-  width: 45%;
+  width: 100%;
+  z-index: -1;
 }
 
 @media screen and (max-width: 1000px) {

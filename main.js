@@ -12,6 +12,9 @@ function menu() {
 menu();
 
 const country = document.querySelector("#country");
+const inputCountry = document.querySelector('.input--country')
+const inputState = document.querySelector('.input--states')
+
 
 async function data() {
 	const response = await fetch(
@@ -31,6 +34,12 @@ async function data() {
 	}
 })();
 
-fetch('https://api.covid19api.com/countries')
-.then(resolve => resolve.json())
-.then(data => console.log(data))
+inputState.addEventListener('click', () => {
+	if (inputCountry.value.toLowerCase() === 'india') {
+		inputState.removeAttribute('readonly');
+	} else {
+		inputState.value = '';
+		inputState.setAttribute('readonly', '');
+	}
+})
+

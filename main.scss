@@ -10,6 +10,8 @@ $text_color: rgb(32, 34, 34);
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	-webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+    scroll-behavior: smooth;
 }
 
 body {
@@ -73,9 +75,8 @@ a {
 		width: 0;
 		height: 3px;
 		background-image: linear-gradient(
-			to left,
-			rgb(100, 181, 247),
-			rgb(53, 18, 253)
+			to right,
+			rgb(160, 30, 247), rgb(6, 117, 243)
 		);
 		left: -10px;
 		bottom: -5px;
@@ -88,7 +89,7 @@ a {
 		border-radius: 100vw;
 		width: 3px;
 		height: 0;
-		background-image: linear-gradient(rgb(100, 181, 247), rgb(53, 18, 253));
+		background-image: linear-gradient(to top, rgb(160, 30, 247), rgb(6, 117, 243));
 		left: -10px;
 		bottom: -5px;
 		transition: all 0.4s ease;
@@ -144,6 +145,7 @@ a {
 // 
 
 .heading {
+	font-family: 'Poppins';
 	font-size: 7em;
 	position: relative;
 	top: 15vh;
@@ -153,16 +155,23 @@ a {
 
 // Input Form
 
-.form__country {
+.form_section {
+	display: flex;
 	position: relative;
-	display: inline-block;
-	top: 30vh;
-	left: 50vw;
-	transform: translate(-50%, -50%);
-	max-width: 30vw;
-	min-width: 250px;
+	height: 50vh;
+	width: 50vw;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: space-around;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 15vh;
+}
+
+.form {
 	height: 80px;
 	overflow: hidden;
+	position: relative;
 
 	.input {
 		width: 100%;
@@ -234,21 +243,31 @@ a {
 	
 }
 
-// Particles animation
-
-.particle_animation {
-	height: 100vh;
-	width: 100vw;
-	position: absolute;
+.track-btn {
+	font-size: 3rem;
+	font-family: 'Montserrat';
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.2rem;
+	color: #fff;
+	width: 200px;
 	display: grid;
 	place-items: center;
-	z-index: -1;
+	padding: 10px;
+	height: 60px;
+	align-self: flex-end;
+	background-image: linear-gradient(to right, rgb(160, 30, 247), rgb(6, 117, 243));
+	border-radius: 100vw;
+	cursor: pointer;
 }
+
+// Particles animation
 
 #particles-js {
 	position: absolute;
 	height: 45%;
-	width: 45%;
+	width: 100%;
+	z-index: -1;
 }
 
 // Responsiveness

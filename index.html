@@ -19,11 +19,10 @@
 			rel="stylesheet"
 		/>
 	</head>
+
 	<body>
 		<nav class="navbar">
-			<div class="logo">
-				COVID TRACKER
-			</div>
+			<div class="logo">COVID TRACKER</div>
 
 			<ul class="navbar__items">
 				<li><a href="#">Home</a></li>
@@ -39,29 +38,53 @@
 			</div>
 		</nav>
 
-		<div class="heading">Covid Tracker</div>
+		<section class="section_1">
+			<div class="heading">Covid Tracker</div>
+			<div class="form_section">
+				<div class="form form__country">
+					<input
+						type="text"
+						name="country"
+						class="input--country input"
+						autocomplete="off"
+						list="country"
+						required
+					/>
+					<label for="country">
+						<span class="label-content">Country</span>
+					</label>
+					<datalist id="country"> </datalist>
+				</div>
+				<div class="form form__states">
+					<input
+						type="text"
+						name="states"
+						class="input--states input"
+						autocomplete="off"
+						list="states"
+						readonly
+						required
+					/>
+					<label for="states">
+						<span class="label-content label-content--states">States</span>
+					</label>
+					<datalist id="states"> </datalist>
+				</div>
 
-		<div class="form">
-			<div class="form__country">
-				<input
-					type="text"
-					name="country"
-					class="input--country input"
-					autocomplete="off"
-					list="country"
-					required
-				/>
-				<label for="country">
-					<span class="label-content">Country</span>
-				</label>
-				<datalist id="country"> </datalist>
+				<div class="track-btn">
+					Track
+				</div>
 			</div>
 			<div class="particle_animation">
 				<div id="particles-js"></div>
 				<script src="particle/particles.js"></script>
 				<script src="particle/app.js"></script>
 			</div>
-		</div>
+		</section>
+
+		<section class="section_2">
+
+		</section>
 
 		<script src="main.js"></script>
 	</body>
