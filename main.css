@@ -14,6 +14,9 @@
 body {
   font-family: "Montserrat", sans-serif;
   overflow-x: hidden;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
 }
 
 a {
@@ -46,7 +49,7 @@ a {
   font-weight: 700;
   cursor: pointer;
   text-transform: uppercase;
-  background: -webkit-linear-gradient(#bd17e6, #3190fc);
+  background: -webkit-linear-gradient(#9512e0, #0f70df);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -84,8 +87,8 @@ a {
   border-radius: 100vw;
   width: 0;
   height: 3px;
-  background-image: -webkit-gradient(linear, left top, right top, from(#bd17e6), to(#3190fc));
-  background-image: linear-gradient(to right, #bd17e6, #3190fc);
+  background-image: -webkit-gradient(linear, left top, right top, from(#9512e0), to(#0f70df));
+  background-image: linear-gradient(to right, #9512e0, #0f70df);
   left: -10px;
   bottom: -5px;
   -webkit-transition: all 0.4s ease;
@@ -98,8 +101,8 @@ a {
   border-radius: 100vw;
   width: 3px;
   height: 0;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#bd17e6), to(#3190fc));
-  background-image: linear-gradient(to top, #bd17e6, #3190fc);
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#9512e0), to(#0f70df));
+  background-image: linear-gradient(to top, #9512e0, #0f70df);
   left: -10px;
   bottom: -5px;
   -webkit-transition: all 0.4s ease;
@@ -107,7 +110,7 @@ a {
 }
 
 .navbar__items li:hover a {
-  background: -webkit-linear-gradient(#bd17e6, #3190fc);
+  background: -webkit-linear-gradient(#9512e0, #0f70df);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -161,29 +164,27 @@ a {
 }
 
 section {
-  padding-inline: 60px;
+  width: 85vw;
+  height: 100vh;
+  -webkit-box-shadow: 0 0 20px #bbb;
+          box-shadow: 0 0 20px #bbb;
 }
 
 .heading {
   font-family: "Poppins";
+  font-weight: 600;
   font-size: 5.5rem;
   position: relative;
   top: 120px;
   text-align: center;
-  background: -webkit-linear-gradient(#bd17e6, #3190fc);
+  background: -webkit-linear-gradient(#9512e0, #0f70df);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   opacity: 0;
-}
-
-.animateOnLoad {
-  -webkit-transform: translateY(0%);
-          transform: translateY(0%);
-  opacity: 1;
-  -webkit-transition: all 0.5s ease-out;
-  transition: all 0.5s ease-out;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
 }
 
 .form_section {
@@ -191,29 +192,31 @@ section {
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  height: 500px;
-  width: 50vw;
+  height: 50vh;
+  min-height: 300px;
+  max-height: 500px;
+  width: 100%;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -ms-flex-pack: distribute;
       justify-content: space-around;
   -ms-flex-line-pack: distribute;
       align-content: space-around;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  top: 15vh;
+  top: 20vh;
+  -webkit-transform: translateY(20%);
+          transform: translateY(20%);
+  opacity: 0;
+  padding-inline: 100px;
 }
 
 .form_section > * {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 100%;
-          flex: 1 1 100%;
+      -ms-flex: 1 1 60%;
+          flex: 1 1 60%;
 }
 
 .form {
   height: 80px;
-  overflow: hidden;
   position: relative;
 }
 
@@ -234,7 +237,7 @@ section {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100px;
   pointer-events: none;
   border-bottom: 2px solid #ccc;
   color: #666;
@@ -244,11 +247,11 @@ section {
   content: "";
   position: absolute;
   left: 0;
-  height: 100%;
-  width: 100%;
-  border-bottom: 3px solid #2795fc;
-  -webkit-transform: translateX(-100%);
-          transform: translateX(-100%);
+  width: 0;
+  bottom: -2px;
+  border-bottom: 2px solid #f54343;
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .form .label-content {
@@ -265,8 +268,7 @@ section {
 }
 
 .form input:focus + label::after {
-  -webkit-transform: translateX(0%);
-          transform: translateX(0%);
+  width: 100%;
   -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
@@ -277,16 +279,13 @@ section {
 }
 
 .form input:valid + label::after {
-  -webkit-transform: translateX(0%);
-          transform: translateX(0%);
+  border-color: #2795fc;
   -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
 
-.form input:invalid + label::after {
-  border-color: #f54343;
-  -webkit-transition: all 0.5s ease-out;
-  transition: all 0.5s ease-out;
+.form .label--states::before {
+  content: "";
 }
 
 .form-btn {
@@ -295,7 +294,8 @@ section {
   place-items: center;
 }
 
-.track-btn, .global-btn {
+.track-btn,
+.global-btn {
   font-size: 2rem;
   font-family: "Montserrat";
   font-weight: 500;
@@ -310,8 +310,8 @@ section {
   padding: 10px;
   height: 60px;
   align-self: flex-end;
-  background-image: -webkit-gradient(linear, left top, right top, from(#bd17e6), to(#3190fc));
-  background-image: linear-gradient(to right, #bd17e6, #3190fc);
+  background-image: -webkit-gradient(linear, left top, right top, from(#9512e0), to(#0f70df));
+  background-image: linear-gradient(to right, #9512e0, #0f70df);
   border-radius: 100vw;
   cursor: pointer;
   -webkit-box-shadow: 0 0 10px #555;
@@ -369,5 +369,13 @@ section {
         -ms-flex: 0 1 40%;
             flex: 0 1 40%;
   }
+}
+
+.animateOnLoad {
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
+  opacity: 1;
+  -webkit-transition: all 0.8s ease-out;
+  transition: all 0.8s ease-out;
 }
 /*# sourceMappingURL=main.css.map */

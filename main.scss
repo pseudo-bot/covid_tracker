@@ -1,8 +1,8 @@
 $main_font: "Montserrat", sans-serif;
 $nav_color: rgb(215, 220, 223);
 $text_color: rgb(32, 34, 34);
-$grad_start: rgb(189, 23, 230);
-$grad_end: rgb(49, 144, 252);
+$grad_start: rgb(149, 18, 224);
+$grad_end: rgb(15, 112, 223);
 
 :root {
 	font-size: 62.5%;
@@ -19,6 +19,8 @@ $grad_end: rgb(49, 144, 252);
 body {
 	font-family: $main_font;
 	overflow-x: hidden;
+	display: grid;
+	place-items: center;
 }
 
 a {
@@ -152,11 +154,14 @@ a {
 // Mian Content
 
 section {
-	padding-inline: 60px;
+	width: 85vw;
+	height: 100vh;
+	box-shadow: 0 0 20px #bbb;
 }
 
 .heading {
 	font-family: "Poppins";
+	font-weight: 600;
 	font-size: 5.5rem;
 	position: relative;
 	top: 120px;
@@ -166,12 +171,8 @@ section {
 	-webkit-text-fill-color: transparent;
 	transform: translateY(-50%);
 	opacity: 0;
-}
-
-.animateOnLoad {
-	transform: translateY(0%);
-	opacity: 1;
-	transition: all 0.5s ease-out;
+	text-transform: uppercase;
+	letter-spacing: 0.2rem;
 }
 
 // Input Form
@@ -179,23 +180,25 @@ section {
 .form_section {
 	display: flex;
 	position: relative;
-	height: 500px;
-	width: 50vw;
+	height: 50vh;
+	min-height: 300px;
+	max-height: 500px;
+	width: 100%;
 	flex-wrap: wrap;
 	justify-content: space-around;
 	align-content: space-around;
-	left: 50%;
-	transform: translateX(-50%);
-	top: 15vh;
-	
+	top: 20vh;
+	transform: translateY(20%);
+	opacity: 0;
+	padding-inline: 100px;
+
 	& > * {
-		flex: 1 1 100%;
+		flex: 1 1 60%;
 	}
 }
 
 .form {
 	height: 80px;
-	overflow: hidden;
 	position: relative;
 
 	.input {
@@ -215,7 +218,7 @@ section {
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		height: 100%;
+		height: 100px;
 		pointer-events: none;
 		border-bottom: 2px solid #ccc;
 		color: #666;
@@ -225,10 +228,10 @@ section {
 		content: "";
 		position: absolute;
 		left: 0;
-		height: 100%;
-		width: 100%;
-		border-bottom: 3px solid rgb(39, 149, 252);
-		transform: translateX(-100%);
+		width: 0;
+		bottom: -2px;
+		border-bottom: 2px solid rgb(245, 67, 67);
+		transition: all 0.5s ease-out;
 	}
 
 	.label-content {
@@ -244,7 +247,7 @@ section {
 			top: 0;
 		}
 		+ label::after {
-			transform: translateX(0%);
+			width: 100%;
 			transition: all 0.5s ease-out;
 		}
 	}
@@ -254,15 +257,14 @@ section {
 			top: 0;
 		}
 		+ label::after {
-			transform: translateX(0%);
+			border-color: rgb(39, 149, 252);
 			transition: all 0.5s ease-out;
 		}
 	}
-	input:invalid {
-		+ label::after {
-			border-color: rgb(245, 67, 67);
-			transition: all 0.5s ease-out;
-		}
+
+	.label--states::before {
+		content: "";
+		
 	}
 }
 
@@ -271,7 +273,8 @@ section {
 	place-items: center;
 }
 
-.track-btn, .global-btn{
+.track-btn,
+.global-btn {
 	font-size: 2rem;
 	font-family: "Montserrat";
 	font-weight: 500;
@@ -334,4 +337,12 @@ section {
 	.form_section > * {
 		flex: 0 1 40%;
 	}
+}
+
+// Class animations
+
+.animateOnLoad {
+	transform: translateY(0%);
+	opacity: 1;
+	transition: all 0.8s ease-out;
 }
