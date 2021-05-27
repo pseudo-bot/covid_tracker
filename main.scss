@@ -1,8 +1,8 @@
 $main_font: "koho", sans-serif;
 $nav_color: rgb(215, 220, 223);
 $text_color: rgb(32, 34, 34);
-$grad_start: rgb(144, 3, 238);
-$grad_end: rgb(6, 117, 243);
+$grad_start: rgb(189, 23, 230);
+$grad_end: rgb(2, 119, 253);
 
 :root {
 	font-size: 62.5%;
@@ -12,8 +12,8 @@ $grad_end: rgb(6, 117, 243);
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	-webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
-    scroll-behavior: smooth;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	scroll-behavior: smooth;
 }
 
 body {
@@ -31,7 +31,7 @@ a {
 	width: 100%;
 	height: 8vh;
 	position: absolute;
-	background-image: linear-gradient(to right, #ddd, #fff);
+	background-image: linear-gradient(to right, $grad_start, $grad_end);
 	z-index: 10;
 	display: flex;
 	align-items: center;
@@ -41,8 +41,8 @@ a {
 .logo {
 	font-size: 4rem;
 	letter-spacing: 0.2rem;
-	font-family: 'Montserrat', sans-serif;
-	color: rgb(4, 104, 255);
+	font-family: "Montserrat", sans-serif;
+	color: #fff;
 	font-weight: 600;
 }
 
@@ -67,7 +67,7 @@ a {
 		position: relative;
 		font-weight: 500;
 		letter-spacing: 0.1rem;
-		color: rgb(2, 112, 214);
+		color: #eee;
 	}
 
 	li a::after {
@@ -76,10 +76,7 @@ a {
 		border-radius: 100vw;
 		width: 0;
 		height: 3px;
-		background-image: linear-gradient(
-			to right,
-			$grad_start, $grad_end
-		);
+		background-image: linear-gradient(to right, #bbb, #fff);
 		left: -10px;
 		bottom: -5px;
 		transition: all 0.4s ease;
@@ -91,7 +88,7 @@ a {
 		border-radius: 100vw;
 		width: 3px;
 		height: 0;
-		background-image: linear-gradient(to top, $grad_start, $grad_end);
+		background-image: linear-gradient(to top, #bbb, #fff);
 		left: -10px;
 		bottom: -5px;
 		transition: all 0.4s ease;
@@ -99,7 +96,7 @@ a {
 
 	li:hover {
 		a {
-			color: rgb(39, 146, 247);
+			color: #fff;
 		}
 
 		a::after {
@@ -126,7 +123,7 @@ a {
 	transform: translateY(-50%);
 
 	& > * {
-		border: 2px solid rgb(2, 119, 187);
+		border: 2px solid #eee;
 		height: 0;
 		margin-block: 3px;
 		border-radius: 100vw;
@@ -136,7 +133,7 @@ a {
 		cursor: pointer;
 	}
 	&:hover > * {
-		border-color: rgb(63, 173, 236);
+		border-color: #fff;
 	}
 }
 
@@ -144,19 +141,19 @@ a {
 	transform: rotate(45deg);
 }
 
-// 
+//
 
 .heading {
-	font-family: 'Poppins';
+	font-family: "Poppins";
 	font-size: 7em;
 	position: relative;
 	top: 15vh;
 	text-align: center;
 	color: rgb(30, 51, 236);
 	font-size: 72px;
-  background: -webkit-linear-gradient($grad_start, $grad_end);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+	background: -webkit-linear-gradient($grad_start, $grad_end);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 // Input Form
@@ -187,7 +184,7 @@ a {
 		color: #333;
 		outline: none;
 		font-size: 2.2rem;
-		font-family: 'Montserrat', sans-serif;
+		font-family: "Montserrat", sans-serif;
 		font-weight: 500;
 	}
 
@@ -219,7 +216,7 @@ a {
 		transition: all 0.3s ease-out;
 	}
 
-	input:focus{
+	input:focus {
 		+ label .label-content {
 			font-size: 1.7rem;
 			top: 0;
@@ -243,15 +240,13 @@ a {
 		+ label::after {
 			border-color: rgb(245, 67, 67);
 			transition: all 0.5s ease-out;
-
 		}
 	}
-	
 }
 
 .track-btn {
 	font-size: 3rem;
-	font-family: 'Montserrat';
+	font-family: "Montserrat";
 	font-weight: 500;
 	text-transform: uppercase;
 	letter-spacing: 0.2rem;
@@ -272,14 +267,16 @@ a {
 #particles-js {
 	position: absolute;
 	width: 100vw;
-	height: 70vh;
+	height: 80vh;
 	z-index: -1;
 }
-
 
 // Responsiveness
 
 @media screen and (max-width: 1024px) {
+	.heading {
+		font-size: 6rem;
+	}
 	.logo {
 		font-size: 3.5rem;
 	}
@@ -291,7 +288,7 @@ a {
 		height: 92vh;
 		width: 40vw;
 		z-index: inherit;
-		background-image: linear-gradient(to top, #ddd, #eee);
+		background-image: linear-gradient(to top, $grad_start, $grad_end);
 		align-items: center;
 		justify-content: space-evenly;
 		transform: translateX(100%);
@@ -306,4 +303,3 @@ a {
 		display: inline-flex;
 	}
 }
-
