@@ -13,7 +13,7 @@
 
 body {
   font-family: "koho", sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 a {
@@ -22,7 +22,7 @@ a {
 
 .navbar {
   width: 100%;
-  height: 80px;
+  height: 8vh;
   position: absolute;
   background-image: -webkit-gradient(linear, left top, right top, from(#ddd), to(#fff));
   background-image: linear-gradient(to right, #ddd, #fff);
@@ -78,8 +78,8 @@ a {
   border-radius: 100vw;
   width: 0;
   height: 3px;
-  background-image: -webkit-gradient(linear, left top, right top, from(#a01ef7), to(#0675f3));
-  background-image: linear-gradient(to right, #a01ef7, #0675f3);
+  background-image: -webkit-gradient(linear, left top, right top, from(#9003ee), to(#0675f3));
+  background-image: linear-gradient(to right, #9003ee, #0675f3);
   left: -10px;
   bottom: -5px;
   -webkit-transition: all 0.4s ease;
@@ -92,8 +92,8 @@ a {
   border-radius: 100vw;
   width: 3px;
   height: 0;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#a01ef7), to(#0675f3));
-  background-image: linear-gradient(to top, #a01ef7, #0675f3);
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#9003ee), to(#0675f3));
+  background-image: linear-gradient(to top, #9003ee, #0675f3);
   left: -10px;
   bottom: -5px;
   -webkit-transition: all 0.4s ease;
@@ -159,6 +159,10 @@ a {
   top: 15vh;
   text-align: center;
   color: #1e33ec;
+  font-size: 72px;
+  background: -webkit-linear-gradient(#9003ee, #0675f3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .form_section {
@@ -272,27 +276,30 @@ a {
   padding: 10px;
   height: 60px;
   align-self: flex-end;
-  background-image: -webkit-gradient(linear, left top, right top, from(#a01ef7), to(#0675f3));
-  background-image: linear-gradient(to right, #a01ef7, #0675f3);
+  background-image: -webkit-gradient(linear, left top, right top, from(#9003ee), to(#0675f3));
+  background-image: linear-gradient(to right, #9003ee, #0675f3);
   border-radius: 100vw;
   cursor: pointer;
 }
 
 #particles-js {
   position: absolute;
-  height: 45%;
-  width: 100%;
+  width: 100vw;
+  height: 70vh;
   z-index: -1;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) {
+  .logo {
+    font-size: 3.5rem;
+  }
   .navbar__items {
     position: absolute;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    top: 80px;
+    top: 8vh;
     right: 0;
     height: 92vh;
     width: 40vw;
