@@ -18,6 +18,8 @@
 			href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
 			rel="stylesheet"
 		/>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.0/dist/chart.min.js"></script>
+
 	</head>
 
 	<body>
@@ -38,8 +40,8 @@
 			</div>
 		</nav>
 
-		<section class="section_1">
-			<div class="heading">Covid 19 Tracker</div>
+		<section class="home_page">
+			<div class="heading">Search Live</div>
 			<!-- <div class="particle_animation">
 				<div id="particles-js"></div>
 				<script src="particle/particles.js"></script>
@@ -60,7 +62,7 @@
 					</label>
 					<datalist id="country"> </datalist>
 				</div>
-				
+
 				<div class="form form__states">
 					<input
 						type="text"
@@ -85,12 +87,11 @@
 					<span class="global-btn">Global Data</span>
 				</div>
 			</div>
-
-			
 		</section>
 
-		<section class="section_2">
-
+		<section class="global_data">
+				<div class="total_cases"></div>
+				<div class="total_recovered"></div>
 		</section>
 
 		<script src="main.js"></script>

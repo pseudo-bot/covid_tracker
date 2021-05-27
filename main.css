@@ -173,6 +173,17 @@ section {
   background: -webkit-linear-gradient(#bd17e6, #3190fc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  opacity: 0;
+}
+
+.animateOnLoad {
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
+  opacity: 1;
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .form_section {

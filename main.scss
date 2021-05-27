@@ -164,6 +164,14 @@ section {
 	background: -webkit-linear-gradient($grad_start, $grad_end);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
+	transform: translateY(-50%);
+	opacity: 0;
+}
+
+.animateOnLoad {
+	transform: translateY(0%);
+	opacity: 1;
+	transition: all 0.5s ease-out;
 }
 
 // Input Form
