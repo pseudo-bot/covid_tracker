@@ -13,7 +13,7 @@
 
 body {
   font-family: "Montserrat", sans-serif;
-  overflow-x: hidden;
+  overflow: hidden;
   display: -ms-grid;
   display: grid;
   place-items: center;
@@ -51,6 +51,7 @@ a {
   text-transform: uppercase;
   background: -webkit-linear-gradient(#9512e0, #0f70df);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -60,7 +61,6 @@ a {
   display: flex;
   list-style-type: none;
   color: #202222;
-  cursor: pointer;
   position: relative;
   font-size: 2em;
 }
@@ -72,6 +72,7 @@ a {
   border-radius: 100vw;
   position: relative;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .navbar__items li a {
@@ -112,6 +113,7 @@ a {
 .navbar__items li:hover a {
   background: -webkit-linear-gradient(#9512e0, #0f70df);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -155,19 +157,27 @@ a {
 }
 
 .menubar:hover > * {
-  border-color: #bbb;
+  border-color: #9512e0;
 }
 
 .menubar--activate > * {
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
 }
 
 section {
   width: 85vw;
+  padding-inline: 20px;
   height: 100vh;
-  -webkit-box-shadow: 0 0 20px #bbb;
-          box-shadow: 0 0 20px #bbb;
+  -webkit-box-shadow: 0 0 15px #ddd;
+          box-shadow: 0 0 15px #ddd;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+section::-webkit-scrollbar {
+  display: none;
 }
 
 .heading {
@@ -175,10 +185,11 @@ section {
   font-weight: 600;
   font-size: 5.5rem;
   position: relative;
-  top: 120px;
+  top: 140px;
   text-align: center;
   background: -webkit-linear-gradient(#9512e0, #0f70df);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
@@ -193,8 +204,8 @@ section {
   display: flex;
   position: relative;
   height: 50vh;
-  min-height: 300px;
-  max-height: 500px;
+  min-height: 400px;
+  max-height: 600px;
   width: 100%;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
@@ -285,7 +296,30 @@ section {
 }
 
 .form .label--states::before {
-  content: "";
+  content: "Currently available only for India";
+  font-size: 1.5rem;
+  color: #fff;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  height: 40px;
+  min-width: 300px;
+  position: absolute;
+  background-color: #f85454;
+  bottom: -60%;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  border-radius: 100vw;
+  opacity: 0;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+}
+
+.form .india-notselected::before {
+  opacity: 1;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
 }
 
 .form-btn {

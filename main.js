@@ -3,6 +3,9 @@ const states = document.querySelector("#states");
 const inputCountry = document.querySelector(".input--country");
 const inputState = document.querySelector(".input--states");
 const totalCases = document.querySelector(".total_cases");
+const labelStates = document.querySelector(".label--states");
+
+let today = new Date();
 
 function menu() {
 	const menubar = document.querySelector(".menubar");
@@ -30,23 +33,25 @@ async function dataSummary() {
 }
 
 async function dataLive() {
-	let today = new Date();
-	date = today.getDate() - 1;
+	let date = today.getDate();
 	let searchDate = `${today.getFullYear()}-${today.getMonth() + 1}-${date}`;
 
-	let statusUrl = `https://api.covid19api.com/live/country/india/status/confirmed/date/${searchDate}T13:13:30Z`;
+	let values, response;
 
-	const response = await fetch(statusUrl);
-	const values = await response.json()
+	while (1) {
+		let searchDate = `${today.getFullYear()}-${today.getMonth() + 1}-${date}`;
 
-	if (values.length === 0) {
-		searchDate = `${today.getFullYear()}-${today.getMonth() + 1}-${date - 1}`;
+		let statusUrl = `https://api.covid19api.com/live/country/india/status/confirmed/date/${searchDate}T13:13:30Z`;
 
-		statusUrl = `https://api.covid19api.com/live/country/india/status/confirmed/date/${searchDate}T13:13:30Z`;
-	
-		const responseNew = await fetch(statusUrl);
-		const valuesNew = await responseNew.json();
-		return valuesNew;
+		response = await fetch(statusUrl);
+		values = await response.json();
+
+		if (values.length == 0) {
+			date--;
+			continue;
+		}
+
+		break;
 	}
 
 	return values;
@@ -64,26 +69,44 @@ async function populateCountry() {
 	}
 }
 
-inputCountry.addEventListener('change', () => {
-	if (inputCountry.value.toLowerCase() === 'india') {
+inputCountry.addEventListener("change", () => {
+	if (inputCountry.value.toLowerCase() === "india") {
 		populateStates();
 	} else {
 		clearElement(states);
 	}
-})
+});
+
+inputState.addEventListener("click", () => {
+	if (inputCountry.value.toLowerCase() !== "india") {
+		labelStates.classList.add("india-notselected");
+		setTimeout(() => {
+			labelStates.classList.remove("india-notselected");
+		}, 2500);
+	}
+});
 
 async function populateStates() {
 	const data = await dataLive();
-	console.log(data)
+	console.log(data);
 	for (let stateVar of data) {
 		const stateNode = document.createElement("OPTION");
-		stateNode.setAttribute('value', stateVar.Province);
+		stateNode.setAttribute("value", stateVar.Province);
 		states.appendChild(stateNode);
 	}
 }
 
 async function populateGlobal() {
-	const data = await dataSummary();
+	const global_today = await dataSummary();
+	const global = global_today.Global;
+
+	const totalCases = document.createTextNode(global.TotalConfirmed)
+	const totalCases = document.createTextNode(global.TotalConfirmed)
+	const totalCases = document.createTextNode(global.TotalConfirmed)
+	const totalCases = document.createTextNode(global.TotalConfirmed)
+
+	document.querySelector('.total_cases').appendChild(totalCases);
+	console.log(global_today.Global)
 }
 
 inputState.addEventListener("click", () => {
@@ -96,15 +119,14 @@ inputState.addEventListener("click", () => {
 });
 
 function clearElement(element) {
-	while(element.firstChild) {
+	while (element.firstChild) {
 		element.removeChild(element.firstChild);
 	}
 }
 
 const execute = () => {
 	populateCountry();
-	populateGlobal();
-	dataLive();
+	// populateGlobal();
 };
 
 execute();
