@@ -1,4 +1,4 @@
-$main_font: "koho", sans-serif;
+$main_font: "Montserrat", sans-serif;
 $nav_color: rgb(215, 220, 223);
 $text_color: rgb(32, 34, 34);
 $grad_start: rgb(189, 23, 230);
@@ -29,9 +29,10 @@ a {
 
 .navbar {
 	width: 100%;
-	height: 8vh;
+	height: 80px;
 	position: fixed;
-	background-image: linear-gradient(to right, $grad_start, $grad_end);
+	background-color: rgb(245, 245, 245);
+	box-shadow: 0 0 15px #aaa;
 	z-index: 10;
 	display: flex;
 	align-items: center;
@@ -42,8 +43,13 @@ a {
 	font-size: 4rem;
 	letter-spacing: 0.2rem;
 	font-family: "Montserrat", sans-serif;
-	color: #fff;
-	font-weight: 600;
+	color: #777;
+	font-weight: 700;
+	cursor: pointer;
+	text-transform: uppercase;
+	background: -webkit-linear-gradient($grad_start, $grad_end);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 .navbar__items {
@@ -67,7 +73,7 @@ a {
 		position: relative;
 		font-weight: 500;
 		letter-spacing: 0.1rem;
-		color: #eee;
+		color: #777;
 	}
 
 	li a::after {
@@ -76,7 +82,7 @@ a {
 		border-radius: 100vw;
 		width: 0;
 		height: 3px;
-		background-image: linear-gradient(to right, #bbb, #fff);
+		background-image: linear-gradient(to right, $grad_start, $grad_end);
 		left: -10px;
 		bottom: -5px;
 		transition: all 0.4s ease;
@@ -88,7 +94,7 @@ a {
 		border-radius: 100vw;
 		width: 3px;
 		height: 0;
-		background-image: linear-gradient(to top, #bbb, #fff);
+		background-image: linear-gradient(to top, $grad_start, $grad_end);
 		left: -10px;
 		bottom: -5px;
 		transition: all 0.4s ease;
@@ -96,7 +102,9 @@ a {
 
 	li:hover {
 		a {
-			color: #fff;
+			background: -webkit-linear-gradient($grad_start, $grad_end);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
 		}
 
 		a::after {
@@ -123,7 +131,7 @@ a {
 	transform: translateY(-50%);
 
 	& > * {
-		border: 2px solid #eee;
+		border: 2px solid #777;
 		height: 0;
 		margin-block: 3px;
 		border-radius: 100vw;
@@ -133,7 +141,7 @@ a {
 		cursor: pointer;
 	}
 	&:hover > * {
-		border-color: #fff;
+		border-color: #bbb;
 	}
 }
 
@@ -141,16 +149,18 @@ a {
 	transform: rotate(45deg);
 }
 
-//
+// Mian Content
+
+section {
+	padding-inline: 60px;
+}
 
 .heading {
 	font-family: "Poppins";
-	font-size: 7em;
+	font-size: 5.5rem;
 	position: relative;
-	top: 15vh;
+	top: 120px;
 	text-align: center;
-	color: rgb(30, 51, 236);
-	font-size: 72px;
 	background: -webkit-linear-gradient($grad_start, $grad_end);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -161,7 +171,7 @@ a {
 .form_section {
 	display: flex;
 	position: relative;
-	height: 50vh;
+	height: 500px;
 	width: 50vw;
 	flex-wrap: wrap;
 	justify-content: space-around;
@@ -169,6 +179,10 @@ a {
 	left: 50%;
 	transform: translateX(-50%);
 	top: 15vh;
+	
+	& > * {
+		flex: 1 1 100%;
+	}
 }
 
 .form {
@@ -244,8 +258,13 @@ a {
 	}
 }
 
-.track-btn {
-	font-size: 3rem;
+.form-btn {
+	display: grid;
+	place-items: center;
+}
+
+.track-btn, .global-btn{
+	font-size: 2rem;
 	font-family: "Montserrat";
 	font-weight: 500;
 	text-transform: uppercase;
@@ -254,12 +273,14 @@ a {
 	width: 200px;
 	display: grid;
 	place-items: center;
+	text-align: center;
 	padding: 10px;
 	height: 60px;
 	align-self: flex-end;
 	background-image: linear-gradient(to right, $grad_start, $grad_end);
 	border-radius: 100vw;
 	cursor: pointer;
+	box-shadow: 0 0 10px #555;
 }
 
 // Particles animation
@@ -274,21 +295,18 @@ a {
 // Responsiveness
 
 @media screen and (max-width: 1024px) {
-	.heading {
-		font-size: 6rem;
-	}
 	.logo {
-		font-size: 3.5rem;
+		font-size: 4rem;
 	}
 	.navbar__items {
 		position: absolute;
 		flex-direction: column;
-		top: 8vh;
+		top: 80px;
 		right: 0;
 		height: 92vh;
 		width: 40vw;
 		z-index: inherit;
-		background-image: linear-gradient(to top, $grad_start, $grad_end);
+		background-color: rgb(245, 245, 245);
 		align-items: center;
 		justify-content: space-evenly;
 		transform: translateX(100%);
@@ -301,5 +319,11 @@ a {
 
 	.menubar {
 		display: inline-flex;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.form_section > * {
+		flex: 0 1 40%;
 	}
 }
