@@ -476,7 +476,7 @@ section::-webkit-scrollbar {
 .total_cases, .graph-confirm {
   background-color: #bce3ff;
   border-radius: 10px;
-  color: #003cff;
+  color: #3461f5;
 }
 
 .total_recovered, .graph-recover {
