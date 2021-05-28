@@ -371,7 +371,9 @@ section {
 	border: 2px solid red;
 	padding: 50px;
 	align-self: flex-end;
-}
+	display: flex;
+	justify-content: center;
+} 
 
 
 // Responsiveness

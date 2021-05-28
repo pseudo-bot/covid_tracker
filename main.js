@@ -103,7 +103,7 @@ async function populateStates() {
 async function populateGlobal() {
 	// Populating global data
 
-    loader.classList.add('loading-screen');
+    // loader.classList.add('loading-screen');
 
     let date = [];
     let ylable = [];
@@ -149,7 +149,7 @@ async function populateGlobal() {
 
     plotData(date, ylable);
 
-    loader.classList.remove('loading-screen')
+    // loader.classList.remove('loading-screen')
 }
 
 inputState.addEventListener("click", () => {
