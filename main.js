@@ -4,8 +4,6 @@ const inputCountry = document.querySelector(".input--country");
 const inputState = document.querySelector(".input--states");
 const labelStates = document.querySelector(".label--states");
 
-let today = new Date();
-
 function menu() {
 	const menubar = document.querySelector(".menubar");
 	const sideMenu = document.querySelector(".navbar__items");
@@ -25,28 +23,34 @@ this.addEventListener("load", () => {
 	document.querySelector(".form_section").classList.add("animateOnLoad");
 });
 
+function convertDate(date) {
+	return `${date.getFullYear()}-${
+		date.getMonth() + 1
+	}-${date.getDate()}`
+}
+
 async function dataSummary() {
+	// API for fetching world data
 	const response = await fetch("https://api.covid19api.com/summary");
 	const values = await response.json();
 	return values;
 }
 
 async function dataLive() {
-	let date = today.getDate();
-	let searchDate = `${today.getFullYear()}-${today.getMonth() + 1}-${date}`;
+	// API for fetching live data of a country from specified date
+	let date = new Date();
 
 	let values, response;
 
 	while (1) {
-		let searchDate = `${today.getFullYear()}-${today.getMonth() + 1}-${date}`;
-
+		let searchDate = convertDate(date);
 		let statusUrl = `https://api.covid19api.com/live/country/india/status/confirmed/date/${searchDate}T13:13:30Z`;
 
 		response = await fetch(statusUrl);
 		values = await response.json();
 
 		if (values.length == 0) {
-			date--;
+			date.setDate(date.getDate() - 1);
 			continue;
 		}
 
@@ -59,6 +63,7 @@ async function dataLive() {
 // Search functions
 
 async function populateCountry() {
+	// Populating country names
 	const data = await dataSummary();
 
 	for (let countryVar of data.Countries) {
@@ -86,6 +91,7 @@ inputState.addEventListener("click", () => {
 });
 
 async function populateStates() {
+	// Populating states if country == india
 	const data = await dataLive();
 	console.log(data);
 	for (let stateVar of data) {
@@ -95,17 +101,64 @@ async function populateStates() {
 	}
 }
 
+async function sortGlobalResponse(start_date, end_date) {
+	const globalResponse = await fetch(
+		`https://api.covid19api.com/world?from=${start_date}T00:00:00Z&to=${end_date}T00:00:00Z`
+	);
+	const globalData = await globalResponse.json();
+	globalData.sort((a, b) => (a.TotalConfirmed > b.TotalConfirmed) ? 1 : -1);
+	
+	return globalData;
+}
+
+
 async function populateGlobal() {
-	const global_today = await dataSummary();
-	const global = global_today.Global;
+	// Populating global data
+	let start_date = new Date();
+	let end_date = new Date();
 
-	// const totalCases = document.createTextNode(global.TotalConfirmed)
-	// const totalCases = document.createTextNode(global.TotalConfirmed)
-	// const totalCases = document.createTextNode(global.TotalConfirmed)
-	// const totalCases = document.createTextNode(global.TotalConfirmed)
+	const global_today_response = await dataSummary();
+	const global_today = global_today_response.Global;
 
-	document.querySelector('.total_cases').appendChild(totalCases);
-	console.log(global_today.Global)
+	const totalCases = document.createTextNode(global_today.TotalConfirmed);
+	const activeCases = document.createTextNode(global_today.TotalConfirmed - global_today.TotalRecovered);
+	const recoveredCases = document.createTextNode(global_today.TotalRecovered);
+	const totalDeaths = document.createTextNode(global_today.TotalDeaths);
+	const newCases = document.createTextNode(global_today.NewConfirmed);
+	const newDeaths = document.createTextNode(global_today.NewDeaths)
+	const newRecovered = document.createTextNode(global_today.NewRecovered)
+    const newActive = document.createTextNode()
+
+	document.querySelector(".total_cases").appendChild(totalCases);
+	document.querySelector(".total_recovered").appendChild(recoveredCases);
+	document.querySelector(".total_active").appendChild(activeCases);
+	document.querySelector(".total_deaths").appendChild(totalDeaths);
+    document.querySelector(".new_cases").appendChild(newCases);
+    document.querySelector(".new_deaths").appendChild(newDeaths);
+    document.querySelector(".new_recovered").appendChild(newRecovered);
+    document.querySelector(".new_active").appendChild(newActive);
+
+
+	// document.querySelector(".new_cases").appendChild()
+
+	let globalData;
+
+	while (1) {
+		start_date.setDate(end_date.getDate() - 30)
+		let search_date_start = convertDate(start_date);
+		let search_date_end =  convertDate(end_date);
+		
+		globalData = await sortGlobalResponse(search_date_start, search_date_end);
+
+		if (globalData.length > 30) { // If today's response is not updated API gives data by country and not the global data
+			end_date.setDate(end_date.getDate() - 1);
+			continue;
+		}
+		
+		break;
+	}
+
+	console.log(globalData);
 }
 
 inputState.addEventListener("click", () => {
@@ -115,6 +168,7 @@ inputState.addEventListener("click", () => {
 		inputState.value = "";
 		inputState.setAttribute("readonly", "");
 	}
+
 });
 
 function clearElement(element) {
@@ -125,7 +179,7 @@ function clearElement(element) {
 
 const execute = () => {
 	populateCountry();
-	// populateGlobal();
+	populateGlobal();
 };
 
 execute();

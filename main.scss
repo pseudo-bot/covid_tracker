@@ -161,6 +161,7 @@ section {
 	height: 100vh;
 	box-shadow: 0 0 15px #ddd;
 	overflow: auto;
+	position: relative;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -323,14 +324,21 @@ section {
 	box-shadow: 0 0 10px #555;
 }
 
-// Particles animation
+.global_section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
 
-#particles-js {
-	position: absolute;
-	width: 100vw;
-	height: 80vh;
-	z-index: -1;
 }
+
+.global_data {
+	position: relative;
+	height: 20vh;
+	width: 90%;
+	border: 2px solid red;
+}
+
 
 // Responsiveness
 
@@ -338,7 +346,7 @@ section {
 	.navbar__items {
 		position: absolute;
 		flex-direction: column;
-		top: 80px;
+		top: 60px;
 		right: 0;
 		height: 92vh;
 		width: 40vw;

@@ -19,7 +19,6 @@
 			rel="stylesheet"
 		/>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.0/dist/chart.min.js"></script>
-
 	</head>
 
 	<body>
@@ -30,7 +29,7 @@
 				<li><a href="#">Home</a></li>
 				<li><a href="#">About</a></li>
 				<li><a href="#">Contact</a></li>
-				<li><a href="#goto">Help</a></li>
+				<li><a href="#">Help</a></li>
 			</ul>
 
 			<div class="menubar">
@@ -40,7 +39,6 @@
 			</div>
 		</nav>
 
-	
 		<section class="home_page">
 			<div class="heading">Search Live</div>
 			<!-- <div class="particle_animation">
@@ -85,18 +83,27 @@
 				</div>
 
 				<div class="form-btn">
-					<span class="global-btn">Global Data</span>
+					<a href="#global"><span class="global-btn">Global Data</span></a>
 				</div>
 			</div>
 		</section>
 
-		<section class="global_data" id="goto">
-				<div class="data">
-					<div class="info total_cases"></div>
-					<div class="info total_recovered"></div>
+		<section class="global_section" id="global">
+			<div class="global_data">
+				<div class="info total_cases">
+					<span class="new_cases"></span>
 				</div>
+				<div class="info total_recovered">
+					<span class="new_recovered"></span>
+				</div>
+				<div class="info total_active">
+					<span class="new_active"></span>
+				</div>
+				<div class="info total_deaths">
+					<span class="new_deaths"></span>
+				</div>
+			</div>
 		</section>
-
 
 		<script src="main.js"></script>
 	</body>
