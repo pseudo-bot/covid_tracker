@@ -3,7 +3,7 @@ const states = document.querySelector("#states");
 const inputCountry = document.querySelector(".input--country");
 const inputState = document.querySelector(".input--states");
 const labelStates = document.querySelector(".label--states");
-const loader = document.querySelector(".load")
+const loader = document.querySelector(".load");
 
 function menu() {
 	const menubar = document.querySelector(".menubar");
@@ -103,53 +103,40 @@ async function populateStates() {
 async function populateGlobal() {
 	// Populating global data
 
-    // loader.classList.add('loading-screen');
-
-    let date = [];
-    let ylable = [];
 
 	const global_today_response = await dataSummary();
 	const global_today = global_today_response.Global;
-    
+
 	document.querySelector(
 		".total_cases"
-	).innerHTML = `${global_today.TotalConfirmed}<span class="new_cases"> ${global_today.NewConfirmed}</span>`;
+	).innerHTML = `<span class="info__title">Confirmed</span><span class="info__data">${global_today.TotalConfirmed}</span><span class="new_cases info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${global_today.NewConfirmed}</span>`;
 	document.querySelector(
 		".total_recovered"
-	).innerHTML = `${global_today.TotalRecovered}<span class="new_recovered"> ${global_today.NewRecovered}</span>`;
+	).innerHTML = `<span class="info__title">Recovered</span><span class="info__data">${global_today.TotalRecovered}</span><span class="new_recovered info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${global_today.NewRecovered}</span>`;
 
 	if (global_today.NewConfirmed - global_today.NewRecovered < 0) {
-		document.querySelector(".total_active").innerHTML = `${
+		document.querySelector(
+			".total_active"
+		).innerHTML = `<span class="info__title">Active</span><span class="info__data">${
 			global_today.TotalConfirmed - global_today.TotalRecovered
-		}<span class="new_active info--decrease"> ${
+		}</span><span class="new_active info--decrease info__subtitle"><i class='fa fas fa-angle-double-down'></i> ${
 			-global_today.NewConfirmed + global_today.NewRecovered
 		}</span>`;
 	} else {
-		document.querySelector(".total_active").innerHTML = `${
+		document.querySelector(
+			".total_active"
+		).innerHTML = `<span class="info__title">Active</span><span class="info__data">${
 			global_today.TotalConfirmed - global_today.TotalRecovered
-		}<span class="new_active"> ${
+		}</span><span class="new_active info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${
 			-global_today.NewConfirmed + global_today.NewRecovered
 		}</span>`;
 	}
 
 	document.querySelector(
 		".total_deaths"
-	).innerHTML = `${global_today.TotalDeaths}<span class="new_deaths"> ${global_today.NewDeaths}</span>`;
+	).innerHTML = `<span class="info__title">Deaths</span><span class="info__data">${global_today.TotalDeaths}</span><span class="new_deaths info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${global_today.NewDeaths}</span>`;
 
-	const globalResponse = await fetch(`https://api.covid19api.com/world`);
-	const globalData = await globalResponse.json();
-
-	globalData.sort((a, b) => (a.TotalConfirmed > b.TotalConfirmed ? 1 : -1));
-
-    for (let values of globalData) {
-        let dateToPush = values.Date.substr(0, 10);
-        date.push(dateToPush);
-        ylable.push(values.TotalConfirmed);
-    }
-
-    plotData(date, ylable);
-
-    // loader.classList.remove('loading-screen')
+	// loader.classList.remove('loading-screen')
 }
 
 inputState.addEventListener("click", () => {
@@ -167,16 +154,56 @@ function clearElement(element) {
 	}
 }
 
-const execute = () => {
-	populateCountry();
-	populateGlobal();
-};
 
-execute();
+// Plotting Graphs
 
-// Charts using Chart.js
+async function plotGlobalData(dataToGraph = "TotalConfirmed") {
+	loader.classList.add('loading-screen');
 
-function plotData(xdata, ydata) {
+	let date = [];
+	let ylable = [];
+	let label;
+	let color;
+
+	const globalResponse = await fetch(`https://api.covid19api.com/world`);
+	const globalData = await globalResponse.json();
+
+	globalData.sort((a, b) => (a.TotalConfirmed > b.TotalConfirmed ? 1 : -1));
+
+	for (let values of globalData) {
+		let dateToPush = values.Date.substr(0, 10);
+		date.push(dateToPush);
+
+		if (dataToGraph === "active") {
+			ylable.push(values.TotalConfirmed - values.TotalRecovered);
+		} else ylable.push(values[dataToGraph]);
+	}
+
+	if (dataToGraph === "TotalConfirmed") {
+		label = "Confirmed Cases";
+		color = "#64b9f5";
+	}
+
+	if (dataToGraph === "TotalRecovered") {
+		label = "Total Recovered";
+		color = "#86f093";
+	}
+	if (dataToGraph === "TotalDeaths") {
+		label = "Deaths";
+		color = "#ff8a8a";
+	}
+	if (dataToGraph === "active") {
+		label = "Active Cases";
+		color = "#f7b879";
+	}
+
+	plot(date, ylable, label, color);
+
+	loader.classList.remove('loading-screen');
+}
+
+function plot(xdata, ydata, label, color) {
+    document.querySelector(".chart-container").innerHTML = `<canvas id="global-chart"></canvas>`;
 	let chart = document.getElementById("global-chart").getContext("2d");
 	let chartDetails = new Chart(chart, {
 		type: "bar",
@@ -184,14 +211,49 @@ function plotData(xdata, ydata) {
 			labels: xdata,
 			datasets: [
 				{
-					label: "Number of cases",
+					label: label,
 					data: ydata,
-                    backgroundColor: '#64b9f5',
-					
+					backgroundColor: color,
 				},
 			],
-            
-		}
+		},
+		options: {
+			maintainAspectRatio: false,
+		},
 	});
 }
+
+// Graph Call functions
+
+document.querySelector(".graph-confirm").addEventListener('click', () => {
+    
+    plotGlobalData('TotalConfirmed');
+})
+
+document.querySelector(".graph-recover").addEventListener("click", () => {
+    plotGlobalData('TotalRecovered');
+})
+
+document.querySelector(".graph-deaths").addEventListener('click', () => {
+    plotGlobalData('TotalDeaths');
+})
+
+document.querySelector(".graph-active").addEventListener('click', () => {
+    plotGlobalData('active');
+})
+
+const execute = () => {
+	populateCountry();
+	populateGlobal();
+    plotGlobalData();
+};
+
+this.addEventListener('load', () => {
+    setTimeout(() => {
+        document.querySelector(".load").classList.remove('loading-screen');
+    document.querySelector(".load").classList.remove('load-start-bg');
+    }, 2000);
+})
+
+execute();
 

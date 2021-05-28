@@ -155,29 +155,32 @@ a {
 
 // Mian Content
 
-.load{
+.load {
 	width: 100vw;
 	height: 100vh;
-	background-color: rgba($color: #bbb, $alpha: 0.4);
 	position: fixed;
 	z-index: -1000;
 	display: grid;
 	place-items: center;
-	
+
 	.loading-icon {
 		background: -webkit-linear-gradient($grad_start, $grad_end);
-			-webkit-background-clip: text;
-			background-clip: text;
-			-webkit-text-fill-color: transparent;
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
 	}
 	opacity: 0;
-	transition: all 1s ease;
+	transition: all 1.5s ease;
 }
 
 .loading-screen {
 	opacity: 1;
 	z-index: 1000;
-	transition: all 1s ease;
+	transition: all 1.5s ease;
+}
+
+.load-start-bg {
+	background-color: #fff;
 }
 
 section {
@@ -350,11 +353,24 @@ section {
 	box-shadow: 0 0 10px #555;
 }
 
+// Global Section
+
+#global {
+	position: relative;
+	bottom: 70px;
+	background-color: red;
+}
+
 .chart-container {
 	position: relative;
-	height: 50vh;
+	height: 45vh;
+	min-height: 300px;
 	width: 80vw;
 	max-width: 1000px;
+
+	#global-chart {
+		height: 100%;
+	}
 }
 
 .global_section {
@@ -366,15 +382,99 @@ section {
 
 .global_data {
 	position: relative;
-	height: 20vh;
 	width: 90%;
-	border: 2px solid red;
-	padding: 50px;
-	align-self: flex-end;
 	display: flex;
 	justify-content: space-around;
-} 
+	align-items: center;
+	flex-wrap: wrap;
+	margin-block: 40px;
+}
 
+.info {
+	// background-image: linear-gradient(to right, $grad_start, $grad_end);
+	color: #111;
+	font-size: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	width: 200px;
+	min-height: 150px;
+	// border: 2px solid red;
+	align-items: center;
+	margin-block: 10px;
+	padding: 20px;
+
+	span {
+		flex: 1 1 100%;
+	}
+
+	.info__title {
+		font-size: 2.2rem;
+		font-family: "poppins";
+		font-weight: 600;
+	}
+
+	.info__data {
+		font-size: 2rem;
+	}
+
+	.info__subtitle {
+		font-size: 1.8rem;
+	}
+}
+
+.total_cases, .graph-confirm{
+	background-color: #bce3ff;
+	border-radius: 10px;
+	color: #003cff;
+}
+
+.total_recovered, .graph-recover{
+	background-color: #cef1d1;
+	border-radius: 10px;
+	color: #03ac2d;
+}
+
+.total_active, .graph-active{
+	background-color: #f9fab7;
+	border-radius: 10px;
+	color: #dd6d05;
+}
+
+.total_deaths, .graph-deaths{
+	background-color: #f7dddd;
+	border-radius: 10px;
+	color: #fc2727;
+}
+
+.graph-switch {
+	position: relative;
+	display: flex;
+	margin-top: 40px;
+	width: 90%;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	& > * {
+		padding-block: 10px;
+		width: 50px;
+		margin-block: 10px;
+		margin-inline: 10px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 1.6rem;
+		font-weight: 600;
+		cursor: pointer;
+
+	}
+
+	.graph-selection {
+		flex: 0 1 100%;
+		font-size: 2.5rem;
+		text-transform: uppercase;
+		color: #555;
+	}
+}
 
 // Responsiveness
 

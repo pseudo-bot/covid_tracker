@@ -53,7 +53,7 @@
 		</nav>
 
 		<section class="home_page">
-			<div class="heading">Search Live</div>
+			<div class="heading">Search Live <i class="fas fa-search"></i></div>
 			<!-- <div class="particle_animation">
 				<div id="particles-js"></div>
 				<script src="particle/particles.js"></script>
@@ -101,29 +101,26 @@
 			</div>
 		</section>
 
-		<!-- <div class="load">
+		<div class="load loading-screen load-start-bg">
 			<span>
 				<i class="loading-icon fab fa-instalod fa-spin fa-7x"></i>
 			</span>
-		</div> -->
-		<section class="global_section" id="global">
-			<div class="chart-container">
-				<canvas id="global-chart"></canvas>
-			</div>
+		</div>
 
-			<div class="global_data">
-				<!-- Dyanamic Data Insertion -->
-				<div class="info total_cases"></div>
-				<div class="info total_recovered"></div>
-				<div class="info total_active"></div>
-				<div class="info total_deaths"></div>
-			</div>
-		</section>
+		<div id="global"></div>
 
 		<section class="global_section">
 			<div class="chart-container">
 				<canvas id="global-chart"></canvas>
 			</div>
+			
+			<div class="graph-switch">
+				<div class="graph-selection"><span class="graph-selection-text">Graph</span></div>
+				<div class="graph-confirm">C</div>
+				<div class="graph-recover">R</div>
+				<div class="graph-active">A</div>
+				<div class="graph-deaths">D</div>
+			</div>
 
 			<div class="global_data">
 				<!-- Dyanamic Data Insertion -->
@@ -133,6 +130,27 @@
 				<div class="info total_deaths"></div>
 			</div>
 		</section>
+
+		<!-- <section class="global_section">
+			<div class="chart-container">
+				<canvas id="global-chart"></canvas>
+			</div>
+
+			<div class="graph-switch">
+				<div class="graph-confirm"></div>
+				<div class="graph-recover"></div>
+				<div class="graph-active"></div>
+				<div class="graph-deaths"></div>
+			</div>
+
+			<div class="global_data">
+				Dyanamic Data Insertion
+				<div class="info total_cases"></div>
+				<div class="info total_recovered"></div>
+				<div class="info total_active"></div>
+				<div class="info total_deaths"></div>
+			</div>
+		</section> -->
 
 		<script src="main.js"></script>
 	</body>
