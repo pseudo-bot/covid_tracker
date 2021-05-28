@@ -549,7 +549,7 @@ section::-webkit-scrollbar {
     top: 60px;
     right: 0;
     height: 92vh;
-    width: 40vw;
+    width: 50vw;
     z-index: inherit;
     background-color: whitesmoke;
     -webkit-box-align: center;
