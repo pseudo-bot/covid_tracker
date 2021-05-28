@@ -402,7 +402,7 @@ section {
 	align-items: center;
 	margin-block: 10px;
 	padding: 20px;
-
+	cursor: pointer;
 	span {
 		flex: 1 1 100%;
 	}
@@ -446,35 +446,34 @@ section {
 	color: #fc2727;
 }
 
-.graph-switch {
-	position: relative;
-	display: flex;
-	margin-top: 40px;
-	width: 90%;
-	flex-wrap: wrap;
-	justify-content: center;
+// .graph-switch {
+// 	position: relative;
+// 	display: flex;
+// 	margin-top: 40px;
+// 	width: 90%;
+// 	flex-wrap: wrap;
+// 	justify-content: center;
 
-	& > * {
-		padding-block: 10px;
-		width: 50px;
-		margin-block: 10px;
-		margin-inline: 10px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-size: 1.6rem;
-		font-weight: 600;
-		cursor: pointer;
+// 	& > * {
+// 		padding-block: 10px;
+// 		width: 50px;
+// 		margin-block: 10px;
+// 		margin-inline: 10px;
+// 		display: flex;
+// 		justify-content: center;
+// 		align-items: center;
+// 		font-size: 1.6rem;
+// 		font-weight: 600;
+// 		cursor: pointer;
+// 	}
 
-	}
-
-	.graph-selection {
-		flex: 0 1 100%;
-		font-size: 2.5rem;
-		text-transform: uppercase;
-		color: #555;
-	}
-}
+// 	.graph-selection {
+// 		flex: 0 1 100%;
+// 		font-size: 2.5rem;
+// 		text-transform: uppercase;
+// 		color: #555;
+// 	}
+// }
 
 // Responsiveness
 
