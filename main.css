@@ -25,7 +25,7 @@ a {
 
 .navbar {
   width: 100%;
-  height: 80px;
+  height: 60px;
   position: fixed;
   background-color: whitesmoke;
   -webkit-box-shadow: 0 0 15px #aaa;
@@ -42,7 +42,7 @@ a {
 }
 
 .logo {
-  font-size: 4rem;
+  font-size: 3rem;
   letter-spacing: 0.2rem;
   font-family: "Montserrat", sans-serif;
   color: #777;
@@ -183,7 +183,7 @@ section::-webkit-scrollbar {
 .heading {
   font-family: "Poppins";
   font-weight: 600;
-  font-size: 4.5rem;
+  font-size: 3.5rem;
   position: relative;
   top: 120px;
   text-align: center;
@@ -239,7 +239,7 @@ section::-webkit-scrollbar {
   border: none;
   color: #333;
   outline: none;
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
 }
@@ -267,7 +267,7 @@ section::-webkit-scrollbar {
 }
 
 .form .label-content {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   position: absolute;
   bottom: 5px;
   -webkit-transition: all 0.3s ease-out;
@@ -275,7 +275,7 @@ section::-webkit-scrollbar {
 }
 
 .form input:focus + label .label-content {
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   top: 0;
 }
 
@@ -286,7 +286,6 @@ section::-webkit-scrollbar {
 }
 
 .form input:valid + label .label-content {
-  font-size: 1.7rem;
   top: 0;
 }
 
@@ -331,19 +330,19 @@ section::-webkit-scrollbar {
 
 .track-btn,
 .global-btn {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-family: "Montserrat";
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   color: #fff;
-  width: 180px;
+  width: 165px;
   display: -ms-grid;
   display: grid;
   place-items: center;
   text-align: center;
   padding: 10px;
-  height: 50px;
+  height: 45px;
   align-self: flex-end;
   background-image: -webkit-gradient(linear, left top, right top, from(#9512e0), to(#0f70df));
   background-image: linear-gradient(to right, #9512e0, #0f70df);
@@ -361,9 +360,6 @@ section::-webkit-scrollbar {
 }
 
 @media screen and (max-width: 1024px) {
-  .logo {
-    font-size: 4rem;
-  }
   .navbar__items {
     position: absolute;
     -webkit-box-orient: vertical;
@@ -399,10 +395,16 @@ section::-webkit-scrollbar {
 }
 
 @media screen and (min-width: 1024px) {
+  .logo {
+    font-size: 4rem;
+  }
   .form_section > * {
     -webkit-box-flex: 0;
         -ms-flex: 0 1 40%;
             flex: 0 1 40%;
+  }
+  .heading {
+    font-size: 5rem;
   }
 }
 
