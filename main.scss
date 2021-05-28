@@ -18,7 +18,7 @@ $grad_end: rgb(15, 112, 223);
 
 body {
 	font-family: $main_font;
-	overflow: hidden;
+	overflow-x: hidden;
 	display: grid;
 	place-items: center;
 }
@@ -155,13 +155,39 @@ a {
 
 // Mian Content
 
+.load{
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba($color: #bbb, $alpha: 0.4);
+	position: fixed;
+	z-index: -1000;
+	display: grid;
+	place-items: center;
+	
+	.loading-icon {
+		background: -webkit-linear-gradient($grad_start, $grad_end);
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+	}
+	opacity: 0;
+	transition: all 1s ease;
+}
+
+.loading-screen {
+	opacity: 1;
+	z-index: 1000;
+	transition: all 1s ease;
+}
+
 section {
 	width: 85vw;
 	padding-inline: 20px;
 	height: 100vh;
-	box-shadow: 0 0 15px #ddd;
+	box-shadow: 0 0 25px #ccc;
 	overflow: auto;
 	position: relative;
+	margin-block-end: 25px;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -324,12 +350,18 @@ section {
 	box-shadow: 0 0 10px #555;
 }
 
+.chart-container {
+	position: relative;
+	height: 50vh;
+	width: 80vw;
+	max-width: 1000px;
+}
+
 .global_section {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-
 }
 
 .global_data {

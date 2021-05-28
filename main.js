@@ -3,6 +3,7 @@ const states = document.querySelector("#states");
 const inputCountry = document.querySelector(".input--country");
 const inputState = document.querySelector(".input--states");
 const labelStates = document.querySelector(".label--states");
+const loader = document.querySelector(".load")
 
 function menu() {
 	const menubar = document.querySelector(".menubar");
@@ -101,9 +102,15 @@ async function populateStates() {
 
 async function populateGlobal() {
 	// Populating global data
+
+    loader.classList.add('loading-screen');
+
+    let date = [];
+    let ylable = [];
+
 	const global_today_response = await dataSummary();
 	const global_today = global_today_response.Global;
-
+    
 	document.querySelector(
 		".total_cases"
 	).innerHTML = `${global_today.TotalConfirmed}<span class="new_cases"> ${global_today.NewConfirmed}</span>`;
@@ -129,15 +136,20 @@ async function populateGlobal() {
 		".total_deaths"
 	).innerHTML = `${global_today.TotalDeaths}<span class="new_deaths"> ${global_today.NewDeaths}</span>`;
 
-	console.log(global_today.TotalConfirmed - global_today.TotalRecovered);
-	console.log(global_today.TotalRecovered);
-
 	const globalResponse = await fetch(`https://api.covid19api.com/world`);
 	const globalData = await globalResponse.json();
 
 	globalData.sort((a, b) => (a.TotalConfirmed > b.TotalConfirmed ? 1 : -1));
 
-	console.log(globalData);
+    for (let values of globalData) {
+        let dateToPush = values.Date.substr(0, 10);
+        date.push(dateToPush);
+        ylable.push(values.TotalConfirmed);
+    }
+
+    plotData(date, ylable);
+
+    loader.classList.remove('loading-screen')
 }
 
 inputState.addEventListener("click", () => {
@@ -161,3 +173,25 @@ const execute = () => {
 };
 
 execute();
+
+// Charts using Chart.js
+
+function plotData(xdata, ydata) {
+	let chart = document.getElementById("global-chart").getContext("2d");
+	let chartDetails = new Chart(chart, {
+		type: "bar",
+		data: {
+			labels: xdata,
+			datasets: [
+				{
+					label: "Number of cases",
+					data: ydata,
+                    backgroundColor: '#64b9f5',
+					
+				},
+			],
+            
+		}
+	});
+}
+
