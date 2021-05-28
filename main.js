@@ -24,9 +24,7 @@ this.addEventListener("load", () => {
 });
 
 function convertDate(date) {
-	return `${date.getFullYear()}-${
-		date.getMonth() + 1
-	}-${date.getDate()}`
+	return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 
 async function dataSummary() {
@@ -101,62 +99,43 @@ async function populateStates() {
 	}
 }
 
-async function sortGlobalResponse(start_date, end_date) {
-	const globalResponse = await fetch(
-		`https://api.covid19api.com/world?from=${start_date}T00:00:00Z&to=${end_date}T00:00:00Z`
-	);
-	const globalData = await globalResponse.json();
-	globalData.sort((a, b) => (a.TotalConfirmed > b.TotalConfirmed) ? 1 : -1);
-	
-	return globalData;
-}
-
-
 async function populateGlobal() {
 	// Populating global data
-	let start_date = new Date();
-	let end_date = new Date();
-
 	const global_today_response = await dataSummary();
 	const global_today = global_today_response.Global;
 
-	const totalCases = document.createTextNode(global_today.TotalConfirmed);
-	const activeCases = document.createTextNode(global_today.TotalConfirmed - global_today.TotalRecovered);
-	const recoveredCases = document.createTextNode(global_today.TotalRecovered);
-	const totalDeaths = document.createTextNode(global_today.TotalDeaths);
-	const newCases = document.createTextNode(global_today.NewConfirmed);
-	const newDeaths = document.createTextNode(global_today.NewDeaths)
-	const newRecovered = document.createTextNode(global_today.NewRecovered)
-    const newActive = document.createTextNode()
+	document.querySelector(
+		".total_cases"
+	).innerHTML = `${global_today.TotalConfirmed}<span class="new_cases"> ${global_today.NewConfirmed}</span>`;
+	document.querySelector(
+		".total_recovered"
+	).innerHTML = `${global_today.TotalRecovered}<span class="new_recovered"> ${global_today.NewRecovered}</span>`;
 
-	document.querySelector(".total_cases").appendChild(totalCases);
-	document.querySelector(".total_recovered").appendChild(recoveredCases);
-	document.querySelector(".total_active").appendChild(activeCases);
-	document.querySelector(".total_deaths").appendChild(totalDeaths);
-    document.querySelector(".new_cases").appendChild(newCases);
-    document.querySelector(".new_deaths").appendChild(newDeaths);
-    document.querySelector(".new_recovered").appendChild(newRecovered);
-    document.querySelector(".new_active").appendChild(newActive);
-
-
-	// document.querySelector(".new_cases").appendChild()
-
-	let globalData;
-
-	while (1) {
-		start_date.setDate(end_date.getDate() - 30)
-		let search_date_start = convertDate(start_date);
-		let search_date_end =  convertDate(end_date);
-		
-		globalData = await sortGlobalResponse(search_date_start, search_date_end);
-
-		if (globalData.length > 30) { // If today's response is not updated API gives data by country and not the global data
-			end_date.setDate(end_date.getDate() - 1);
-			continue;
-		}
-		
-		break;
+	if (global_today.NewConfirmed - global_today.NewRecovered < 0) {
+		document.querySelector(".total_active").innerHTML = `${
+			global_today.TotalConfirmed - global_today.TotalRecovered
+		}<span class="new_active info--decrease"> ${
+			-global_today.NewConfirmed + global_today.NewRecovered
+		}</span>`;
+	} else {
+		document.querySelector(".total_active").innerHTML = `${
+			global_today.TotalConfirmed - global_today.TotalRecovered
+		}<span class="new_active"> ${
+			-global_today.NewConfirmed + global_today.NewRecovered
+		}</span>`;
 	}
+
+	document.querySelector(
+		".total_deaths"
+	).innerHTML = `${global_today.TotalDeaths}<span class="new_deaths"> ${global_today.NewDeaths}</span>`;
+
+	console.log(global_today.TotalConfirmed - global_today.TotalRecovered);
+	console.log(global_today.TotalRecovered);
+
+	const globalResponse = await fetch(`https://api.covid19api.com/world`);
+	const globalData = await globalResponse.json();
+
+	globalData.sort((a, b) => (a.TotalConfirmed > b.TotalConfirmed ? 1 : -1));
 
 	console.log(globalData);
 }
@@ -168,7 +147,6 @@ inputState.addEventListener("click", () => {
 		inputState.value = "";
 		inputState.setAttribute("readonly", "");
 	}
-
 });
 
 function clearElement(element) {

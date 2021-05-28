@@ -372,6 +372,9 @@ section::-webkit-scrollbar {
   height: 20vh;
   width: 90%;
   border: 2px solid red;
+  padding: 50px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 @media screen and (max-width: 1024px) {
