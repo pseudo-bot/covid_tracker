@@ -2,7 +2,6 @@ const country = document.querySelector("#country");
 const states = document.querySelector("#states");
 const inputCountry = document.querySelector(".input--country");
 const inputState = document.querySelector(".input--states");
-const totalCases = document.querySelector(".total_cases");
 const labelStates = document.querySelector(".label--states");
 
 let today = new Date();
@@ -100,10 +99,10 @@ async function populateGlobal() {
 	const global_today = await dataSummary();
 	const global = global_today.Global;
 
-	const totalCases = document.createTextNode(global.TotalConfirmed)
-	const totalCases = document.createTextNode(global.TotalConfirmed)
-	const totalCases = document.createTextNode(global.TotalConfirmed)
-	const totalCases = document.createTextNode(global.TotalConfirmed)
+	// const totalCases = document.createTextNode(global.TotalConfirmed)
+	// const totalCases = document.createTextNode(global.TotalConfirmed)
+	// const totalCases = document.createTextNode(global.TotalConfirmed)
+	// const totalCases = document.createTextNode(global.TotalConfirmed)
 
 	document.querySelector('.total_cases').appendChild(totalCases);
 	console.log(global_today.Global)
