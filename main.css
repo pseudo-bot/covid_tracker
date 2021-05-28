@@ -183,9 +183,9 @@ section::-webkit-scrollbar {
 .heading {
   font-family: "Poppins";
   font-weight: 600;
-  font-size: 5.5rem;
+  font-size: 4.5rem;
   position: relative;
-  top: 140px;
+  top: 100px;
   text-align: center;
   background: -webkit-linear-gradient(#9512e0, #0f70df);
   -webkit-background-clip: text;
@@ -204,7 +204,7 @@ section::-webkit-scrollbar {
   display: flex;
   position: relative;
   height: 50vh;
-  min-height: 400px;
+  min-height: 350px;
   max-height: 600px;
   width: 100%;
   -ms-flex-wrap: wrap;
@@ -214,6 +214,7 @@ section::-webkit-scrollbar {
   -ms-flex-line-pack: distribute;
       align-content: space-around;
   top: 20vh;
+  margin-top: 50px;
   -webkit-transform: translateY(20%);
           transform: translateY(20%);
   opacity: 0;
@@ -222,8 +223,8 @@ section::-webkit-scrollbar {
 
 .form_section > * {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 60%;
-          flex: 1 1 60%;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
 }
 
 .form {
@@ -330,19 +331,19 @@ section::-webkit-scrollbar {
 
 .track-btn,
 .global-btn {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-family: "Montserrat";
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   color: #fff;
-  width: 200px;
+  width: 180px;
   display: -ms-grid;
   display: grid;
   place-items: center;
   text-align: center;
   padding: 10px;
-  height: 60px;
+  height: 50px;
   align-self: flex-end;
   background-image: -webkit-gradient(linear, left top, right top, from(#9512e0), to(#0f70df));
   background-image: linear-gradient(to right, #9512e0, #0f70df);

@@ -173,9 +173,9 @@ section {
 .heading {
 	font-family: "Poppins";
 	font-weight: 600;
-	font-size: 5.5rem;
+	font-size: 4.5rem;
 	position: relative;
-	top: 140px;
+	top: 100px;
 	text-align: center;
 	background: -webkit-linear-gradient($grad_start, $grad_end);
 	-webkit-background-clip: text;
@@ -193,19 +193,19 @@ section {
 	display: flex;
 	position: relative;
 	height: 50vh;
-	min-height: 400px;
+	min-height: 350px;
 	max-height: 600px;
 	width: 100%;
 	flex-wrap: wrap;
 	justify-content: space-around;
 	align-content: space-around;
 	top: 20vh;
+	margin-top: 50px;
 	transform: translateY(20%);
 	opacity: 0;
 	padding-inline: 100px;
-
 	& > * {
-		flex: 1 1 60%;
+		flex: 1 1 100%;
 	}
 }
 
@@ -305,18 +305,18 @@ section {
 
 .track-btn,
 .global-btn {
-	font-size: 2rem;
+	font-size: 1.8rem;
 	font-family: "Montserrat";
 	font-weight: 500;
 	text-transform: uppercase;
 	letter-spacing: 0.2rem;
 	color: #fff;
-	width: 200px;
+	width: 180px;
 	display: grid;
 	place-items: center;
 	text-align: center;
 	padding: 10px;
-	height: 60px;
+	height: 50px;
 	align-self: flex-end;
 	background-image: linear-gradient(to right, $grad_start, $grad_end);
 	border-radius: 100vw;
