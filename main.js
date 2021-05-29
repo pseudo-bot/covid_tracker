@@ -297,7 +297,7 @@ navigator.geolocation.getCurrentPosition((position) => {
 	reverseGeolocate(position.coords.latitude, position.coords.latitude);
 });
 
-//  Execute at startup
+//  Execute at Startup
 
 const execute = () => {
 	populateCountry();
