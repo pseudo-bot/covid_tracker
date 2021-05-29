@@ -206,6 +206,17 @@ section {
   position: relative;
   -webkit-margin-after: 25px;
           margin-block-end: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -402,20 +413,6 @@ section::-webkit-scrollbar {
 
 .chart-container #global-chart {
   height: 100%;
-}
-
-.global_section {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
 }
 
 .global_data {

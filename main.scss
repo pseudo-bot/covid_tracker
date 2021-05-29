@@ -191,6 +191,10 @@ section {
 	overflow: auto;
 	position: relative;
 	margin-block-end: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -373,13 +377,6 @@ section {
 	}
 }
 
-.global_section {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
-}
-
 .global_data {
 	position: relative;
 	width: 90%;
@@ -391,14 +388,12 @@ section {
 }
 
 .info {
-	// background-image: linear-gradient(to right, $grad_start, $grad_end);
 	color: #111;
 	font-size: 1.5rem;
 	display: flex;
 	flex-direction: column;
 	width: 200px;
 	min-height: 150px;
-	// border: 2px solid red;
 	align-items: center;
 	margin-block: 10px;
 	padding: 20px;

@@ -35,7 +35,22 @@ async function dataSummary() {
 	return values;
 }
 
-async function dataLive() {
+async function obtainSlug(country) {
+	const response = await dataSummary();
+	countryArr = response.Countries;
+	let slugIndex = countryArr.findIndex(element => element.Country.toLowerCase() === country.toLowerCase())
+	return countryArr[slugIndex].Slug;
+}
+
+async function dataDayOneCountry() {
+	const response = await fetch(`https://api.covid19api.com/dayone/country/india
+	`);
+
+	const countryData = await response.json();
+	console.log(countryData);
+}
+
+async function dataLiveStates() {
 	// API for fetching live data of a country from specified date
 	let date = new Date();
 
@@ -43,7 +58,7 @@ async function dataLive() {
 
 	while (1) {
 		let searchDate = convertDate(date);
-		let statusUrl = `https://api.covid19api.com/live/country/india/status/confirmed/date/${searchDate}T13:13:30Z`;
+		let statusUrl = `https://api.covid19api.com/live/country/india`;
 
 		response = await fetch(statusUrl);
 		values = await response.json();
@@ -56,8 +71,13 @@ async function dataLive() {
 		break;
 	}
 
+	let state = values.filter(element => element.Province === 'Karnataka');
+	// console.log(values);
+
 	return values;
 }
+
+// dataLive();
 
 // Search functions
 
@@ -92,7 +112,6 @@ inputState.addEventListener("click", () => {
 async function populateStates() {
 	// Populating states if country == india
 	const data = await dataLive();
-	console.log(data);
 	for (let stateVar of data) {
 		const stateNode = document.createElement("OPTION");
 		stateNode.setAttribute("value", stateVar.Province);
@@ -100,42 +119,39 @@ async function populateStates() {
 	}
 }
 
+function populateRetrievedData(data, mod) {
+	document.querySelector(
+		`.total_cases${mod}`
+	).innerHTML = `<span class="info__title">Confirmed</span><span class="info__data">${data.TotalConfirmed}</span><span class="new_cases info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${data.NewConfirmed}</span>`;
+	document.querySelector(
+		`.total_recovered${mod}`
+	).innerHTML = `<span class="info__title">Recovered</span><span class="info__data">${data.TotalRecovered}</span><span class="new_recovered info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${data.NewRecovered}</span>`;
+
+	let sign;
+
+	if (data.NewConfirmed - data.NewRecovered < 0) sign = 'down';
+	else sign = 'up';
+
+	document.querySelector(
+		`.total_active${mod}`
+	).innerHTML = `<span class="info__title">Active</span><span class="info__data">${
+		data.TotalConfirmed - data.TotalRecovered
+	}</span><span class="new_active info__subtitle"><i class='fa fas fa-angle-double-{sign}'></i> ${
+		-data.NewConfirmed + data.NewRecovered
+	}</span>`;
+
+	document.querySelector(
+		`.total_deaths${mod}`
+	).innerHTML = `<span class="info__title">Deaths</span><span class="info__data">${data.TotalDeaths}</span><span class="new_deaths info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${data.NewDeaths}</span>`;
+}
+
 async function populateGlobal() {
 	// Populating global data
 
-
 	const global_today_response = await dataSummary();
 	const global_today = global_today_response.Global;
-
-	document.querySelector(
-		".total_cases"
-	).innerHTML = `<span class="info__title">Confirmed</span><span class="info__data">${global_today.TotalConfirmed}</span><span class="new_cases info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${global_today.NewConfirmed}</span>`;
-	document.querySelector(
-		".total_recovered"
-	).innerHTML = `<span class="info__title">Recovered</span><span class="info__data">${global_today.TotalRecovered}</span><span class="new_recovered info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${global_today.NewRecovered}</span>`;
-
-	if (global_today.NewConfirmed - global_today.NewRecovered < 0) {
-		document.querySelector(
-			".total_active"
-		).innerHTML = `<span class="info__title">Active</span><span class="info__data">${
-			global_today.TotalConfirmed - global_today.TotalRecovered
-		}</span><span class="new_active info--decrease info__subtitle"><i class='fa fas fa-angle-double-down'></i> ${
-			-global_today.NewConfirmed + global_today.NewRecovered
-		}</span>`;
-	} else {
-		document.querySelector(
-			".total_active"
-		).innerHTML = `<span class="info__title">Active</span><span class="info__data">${
-			global_today.TotalConfirmed - global_today.TotalRecovered
-		}</span><span class="new_active info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${
-			-global_today.NewConfirmed + global_today.NewRecovered
-		}</span>`;
-	}
-
-	document.querySelector(
-		".total_deaths"
-	).innerHTML = `<span class="info__title">Deaths</span><span class="info__data">${global_today.TotalDeaths}</span><span class="new_deaths info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${global_today.NewDeaths}</span>`;
-
+	
+	populateRetrievedData(global_today, 'G');
 	// loader.classList.remove('loading-screen')
 }
 
@@ -197,14 +213,14 @@ async function plotGlobalData(dataToGraph = "TotalConfirmed") {
 		color = "#f7b879";
 	}
 
-	plot(date, ylable, label, color);
+	plot(date, ylable, label, color, "global-chart");
 
 	loader.classList.remove('loading-screen');
 }
 
-function plot(xdata, ydata, label, color) {
-    document.querySelector(".chart-container").innerHTML = `<canvas id="global-chart"></canvas>`;
-	let chart = document.getElementById("global-chart").getContext("2d");
+function plot(xdata, ydata, label, color, chartContainer) {
+    document.querySelector(`.${chartContainer}-container`).innerHTML = `<canvas id="global-chart"></canvas>`;
+	let chart = document.getElementById(chartContainer).getContext("2d");
 	let chartDetails = new Chart(chart, {
 		type: "bar",
 		data: {
@@ -225,22 +241,42 @@ function plot(xdata, ydata, label, color) {
 
 // Graph Call functions
 
-document.querySelector(".graph-confirm").addEventListener('click', () => {
+const graphConfirm = document.querySelector(".graph-confirm");
+const graphRecover = document.querySelector('.graph-recover');
+const graphDeaths = document.querySelector(".graph-deaths");
+const graphActive = document.querySelector(".graph-active");
+
+graphConfirm.addEventListener('click', () => {
     
     plotGlobalData('TotalConfirmed');
 })
 
-document.querySelector(".graph-recover").addEventListener("click", () => {
+graphRecover.addEventListener("click", () => {
     plotGlobalData('TotalRecovered');
 })
 
-document.querySelector(".graph-deaths").addEventListener('click', () => {
+graphDeaths.addEventListener('click', () => {
     plotGlobalData('TotalDeaths');
 })
 
-document.querySelector(".graph-active").addEventListener('click', () => {
+graphActive.addEventListener('click', () => {
     plotGlobalData('active');
 })
+
+// let graphGlobal = ['TotalConfirmed', 'TotalRecovered', 'active', 'TotalDeaths']
+// let graphGlobalIndex = 1;
+
+// function autoPlotGlobal() {
+// 	if (graphGlobalIndex == graphGlobal.length) {
+// 		graphGlobalIndex = 0;
+// 	}
+// 	plotGlobalData(graphGlobal[graphGlobalIndex]);
+// 	graphGlobalIndex++;
+// }
+
+// setInterval(() => {
+// 	autoPlotGlobal();
+// }, 9000);
 
 const execute = () => {
 	populateCountry();
