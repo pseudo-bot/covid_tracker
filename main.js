@@ -140,10 +140,23 @@ async function populateStatesData() {
 	dataRepresentationStates(stateData[stateData.length - 1], "S");
 	loader.classList.remove("loading-screen");
 
-	if (stateData[stateData.length - 1].Active > 20000) {
+	let active = stateData[stateData.length - 1].Active;
+
+	if (active > 15000) {
 		document
 			.querySelector(".alert-window-container")
 			.classList.add("alert-window--activate");
+		document.querySelector(".high").classList.add("red");
+	} else if (active <= 15000 && active > 1000) {
+		document
+			.querySelector(".alert-window-container")
+			.classList.add("alert-window--activate");
+		document.querySelector(".mod").classList.add("yellow");
+	} else if (active <= 1000) {
+		document
+			.querySelector(".alert-window-container")
+			.classList.add("alert-window--activate");
+		document.querySelector(".low").classList.add("green");
 	}
 }
 
@@ -426,8 +439,23 @@ document.querySelector(".track-btn").addEventListener("click", () => {
 	getlocation();
 });
 
-document.querySelector(".close-alert").addEventListener("click", () => {
-	document
-		.querySelector(".alert-window-container")
-		.classList.remove("alert-window--activate");
-});
+document.querySelectorAll(".close-alert").forEach((element) =>
+	element.addEventListener("click", () => {
+		document
+			.querySelector(".alert-window-container")
+			.classList.remove("alert-window--activate");
+		const high = document.querySelector(".high");
+		const mod = document.querySelector(".mod");
+		const low = document.querySelector(".low");
+
+		if (high.classList.contains("red")) {
+			high.classList.remove("red");
+		}
+		if (mod.classList.contains("yellow")) {
+			mod.classList.remove("yellow");
+		}
+		if (low.classList.contains("green")) {
+			low.classList.remove("green");
+		}
+	})
+);

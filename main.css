@@ -665,22 +665,12 @@ section::-webkit-scrollbar {
   max-height: 600px;
   background-color: #f8c0c0;
   overflow: hidden;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-transition: all 1s ease-out;
-  transition: all 1s ease-out;
+  display: none;
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .alert-window .alert-head {
-  background-color: #fa8c8c;
   position: relative;
   height: clamp(50px, 15%, 75px);
   display: -ms-grid;
@@ -688,7 +678,6 @@ section::-webkit-scrollbar {
   place-items: center;
   font-size: clamp(2rem, 3vw, 3rem);
   font-weight: 700;
-  color: #fa0000;
   width: 100%;
   text-transform: uppercase;
 }
@@ -710,11 +699,69 @@ section::-webkit-scrollbar {
   color: #444;
 }
 
+.red {
+  background-color: #ffc7c7;
+  color: #fa0000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.red .alert-head {
+  background-color: #f88c8c;
+}
+
+.yellow {
+  background-color: #fad3bc;
+  color: #fa5203;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.yellow .alert-head {
+  background-color: #fcaf7c;
+}
+
+.green {
+  background-color: #b1fcb1;
+  color: #048604;
+  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.green .alert-head {
+  background-color: #49f149;
+}
+
 .alert-window--activate {
   opacity: 1;
   z-index: 10000;
-  -webkit-transition: all 1s ease-in;
-  transition: all 1s ease-in;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
 }
 
 @media screen and (max-width: 1024px) {

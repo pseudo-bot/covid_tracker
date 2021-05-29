@@ -617,20 +617,16 @@ section {
 	max-height: 600px;
 	background-color: #f8c0c0;
 	overflow: hidden;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	display: none;
 	transition: all 0.5s ease-out;
-	
+
 	.alert-head {
-		background-color: rgb(250, 140, 140);
 		position: relative;
 		height: clamp(50px, 15%, 75px);
 		display: grid;
 		place-items: center;
 		font-size: clamp(2rem, 3vw, 3rem);
 		font-weight: 700;
-		color: rgb(250, 0, 0);
 		width: 100%;
 		text-transform: uppercase;
 	}
@@ -652,11 +648,46 @@ section {
 	}
 }
 
+.red {
+	background-color: rgb(255, 199, 199);
+	color: rgb(250, 0, 0);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	.alert-head {
+		background-color: #f88c8c;
+	}
+}
+
+.yellow {
+	background-color: rgb(250, 211, 188);
+	color: rgb(250, 82, 3);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	.alert-head {
+		background-color: #fcaf7c;
+	}
+}
+
+.green {
+	background-color: rgb(177, 252, 177);
+	color: rgb(4, 134, 4);
+	display: none;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	.alert-head {
+		background-color: rgb(73, 241, 73);
+	}
+}
+
 .alert-window--activate {
 	opacity: 1;
 	z-index: 10000;
 	transition: all 0.5s ease-in;
 }
+
 
 // Responsiveness
 
