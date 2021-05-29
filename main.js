@@ -31,13 +31,14 @@ async function dataSummary() {
 	return values;
 }
 
-async function obtainSlug(country="India") {
+async function obtainSlug(country = "India") {
 	const response = await dataSummary();
 	countryArr = response.Countries;
 	let slugIndex = countryArr.findIndex(
 		(element) => element.Country.toLowerCase() === country.toLowerCase()
 	);
-	document.querySelector('.country-name').innerHTML = countryArr[slugIndex].Country;
+	document.querySelector(".country-name").innerHTML =
+		countryArr[slugIndex].Country;
 	return countryArr[slugIndex].Slug;
 }
 // Search functions
@@ -130,12 +131,20 @@ async function populateCountryData(input = "India") {
 async function populateStatesData() {
 	loader.classList.add("loading-screen");
 
-	const response = await fetch('https://api.covid19api.com/live/country/india');
+	const response = await fetch("https://api.covid19api.com/live/country/india");
 	const data = await response.json();
-	const stateData = data.filter(element => element.Province.toLowerCase() === stateName.toLowerCase())
-	
-	dataRepresentationStates(stateData[stateData.length - 1], "S")
+	const stateData = data.filter(
+		(element) => element.Province.toLowerCase() === stateName.toLowerCase()
+	);
+
+	dataRepresentationStates(stateData[stateData.length - 1], "S");
 	loader.classList.remove("loading-screen");
+
+	if (stateData[stateData.length - 1].Active > 10000) {
+		document
+			.querySelector(".alert-window-container")
+			.classList.add("alert-window--activate");
+	}
 }
 
 // Plotting Graphs
@@ -237,7 +246,7 @@ async function plotCountryData(dataToGraph = "Confirmed", slug = "india") {
 	loader.classList.remove("loading-screen");
 }
 
-async function plotStatesData(dataToGraph="Confirmed") {
+async function plotStatesData(dataToGraph = "Confirmed") {
 	loader.classList.add("loading-screen");
 
 	let date = [];
@@ -245,9 +254,11 @@ async function plotStatesData(dataToGraph="Confirmed") {
 	let label;
 	let color, bgcolor;
 
-	const response = await fetch('https://api.covid19api.com/live/country/india');
+	const response = await fetch("https://api.covid19api.com/live/country/india");
 	const data = await response.json();
-	const stateData = data.filter(element => element.Province.toLowerCase() === stateName.toLowerCase())
+	const stateData = data.filter(
+		(element) => element.Province.toLowerCase() === stateName.toLowerCase()
+	);
 
 	for (let values of stateData) {
 		let dateToPush = values.Date.substr(0, 10);
@@ -360,7 +371,7 @@ async function reverseGeolocate(lat, long) {
 	);
 	const data = await response.json();
 	stateName = data.address.state;
-	document.querySelector('.states-name').innerHTML = stateName;
+	document.querySelector(".states-name").innerHTML = stateName;
 
 	await populateStatesData(stateName);
 	plotStatesData();
@@ -377,7 +388,6 @@ function getlocation() {
 		);
 	}
 }
-
 
 //  Execute at Startup
 
@@ -437,7 +447,13 @@ document.querySelector(".search-btn").addEventListener("click", async () => {
 	plotCountryData("Confirmed", slugValue);
 });
 
-document.querySelector('.track-btn').addEventListener("click", () => {
-	document.querySelector('.states_section').style.display = 'flex';
+document.querySelector(".track-btn").addEventListener("click", () => {
+	document.querySelector(".states_section").style.display = "flex";
 	getlocation();
-})
+});
+
+document.querySelector(".close-alert").addEventListener("click", () => {
+	document
+		.querySelector(".alert-window-container")
+		.classList.remove("alert-window--activate");
+});

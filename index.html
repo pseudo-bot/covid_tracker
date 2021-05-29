@@ -21,8 +21,7 @@
 			href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
 			rel="stylesheet"
 		/>
-		<link rel="icon" href="graphics/coronavirus.png" type="image/icon type">
-
+		<link rel="icon" href="graphics/coronavirus.png" type="image/icon type" />
 
 		<!-- Scripts -->
 
@@ -42,7 +41,7 @@
 				<li><a href="#">Home</a></li>
 				<li><a href="#global">Global</a></li>
 				<li><a href="#gotocountry">Country</a></li>
-				<li><a href="#">Contact</a></li>
+				<li><a href="#contact">Contact</a></li>
 			</ul>
 
 			<div class="menubar">
@@ -75,22 +74,6 @@
 					<datalist id="country"></datalist>
 				</div>
 
-				<!-- <div class="form form__states">
-					<input
-						type="text"
-						name="states"
-						class="input--states input"
-						autocomplete="off"
-						list="states"
-						readonly
-						required
-					/>
-					<label for="states" class="label--states">
-						<span class="label-content label-content--states">State</span>
-					</label>
-					<datalist id="states"></datalist>
-				</div> -->
-
 				<div class="buttons">
 					<div class="form-btn">
 						<a href="#gotocountry"><span class="search-btn">Search</span></a>
@@ -111,7 +94,7 @@
 			</span>
 		</div>
 
-		<div id="global"></div>
+		<div id="global" class="section-link"></div>
 
 		<section class="global_section">
 			<div class="global-name">GLOBAL</div>
@@ -127,10 +110,10 @@
 			</div>
 		</section>
 
-		<div id="gotocountry"></div>
+		<div id="gotocountry" class="section-link"></div>
 
 		<section class="country_section">
-			<div class="country-name">India</div>
+			<div class="country-name section-heading">India</div>
 			<div class="country-chart-container chart-container">
 				<canvas id="country-chart"></canvas>
 			</div>
@@ -150,10 +133,10 @@
 			</div>
 		</section>
 
-		<div id="states"></div>
+		<div id="states" class="section-link"></div>
 
 		<section class="states_section">
-			<div class="states-name">India</div>
+			<div class="states-name section-heading">India</div>
 			<div class="states-chart-container chart-container">
 				<canvas id="states-chart"></canvas>
 			</div>
@@ -172,6 +155,63 @@
 				<div class="info total_deaths total_deathsS graph-deaths"></div>
 			</div>
 		</section>
+
+		<div id="contact" class="section-link"></div>
+
+		<section class="contactsection">
+			<div class="contact-name section-heading">Contact Me</div>
+			<img
+				src="graphics/Mail-rafiki.png"
+				alt="Contact me"
+				class="contact-image"
+			/>
+			<div class="container">
+				<div class="contactext">
+					For any queries or bugs feel free to reach out:
+				</div>
+				<div class="one">
+					<span class="fas fa-envelope"></span>
+					<a href="mailto:shivamx6174@gmail.com"
+						><b>shivamx6174@gmail.com</b></a
+					>
+				</div>
+				<div class="three">Connect with me via:</div>
+				<div class="social">
+					<span class="insta"
+						><a href="https://www.instagram.com/_seevum/"
+							><span class="fab fa-instagram"></span></a
+					></span>
+					<span class="fb"
+						><a href="https://www.facebook.com/shivamkr6174"
+							><span class="fab fa-facebook"></span></a
+					></span>
+					<span class="git"
+						><a href="https://github.com/pseudo-bot"
+							><span class="fab fa-github"></span></a
+					></span>
+					<span class="lin"
+						><a href="https://www.linkedin.com/in/pseudobot/"
+							><span class="fab fa-linkedin"></span></a
+					></span>
+					<span class="twt"
+						><a href="https://twitter.com/shivamkr__"
+							><span class="fab fa-twitter"></span></a
+					></span>
+				</div>
+			</div>
+		</section>
+
+		<div class="alert-window-container">
+			<div class="alert-window">
+				<div class="alert-head">
+					Red Alert
+					<i class="fas fa-times-circle close-alert"></i>
+				</div>
+				<div class="alert-content">You are in a location where there is a high concentration of active covid cases.
+					If under lockdown, follow lockdown guidelines strictly. Do not leave home until extremely necessary. Together we have to and we will fight covid. Stay home, stay safe. 
+				</div>
+			</div>
+		</div>
 
 		<script src="main.js"></script>
 	</body>

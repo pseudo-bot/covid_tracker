@@ -414,8 +414,7 @@ section::-webkit-scrollbar {
           box-shadow: 0 0 10px #555;
 }
 
-#gotocountry,
-#global, #states {
+.section-link {
   position: relative;
   bottom: 70px;
 }
@@ -436,8 +435,7 @@ section::-webkit-scrollbar {
   margin-top: 100px;
 }
 
-.country-name,
-.global-name, .states-name {
+.section-heading {
   height: 100px;
   display: -ms-grid;
   display: grid;
@@ -545,6 +543,180 @@ section::-webkit-scrollbar {
   display: none;
 }
 
+.animateOnLoad {
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
+  opacity: 1;
+  -webkit-transition: all 0.8s ease-out;
+  transition: all 0.8s ease-out;
+}
+
+.contactsection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 50px;
+}
+
+.contactsection > * {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
+}
+
+.one, .two, .three {
+  font-size: 1.8rem;
+  line-height: 3rem;
+  padding-block: 1rem;
+}
+
+.one a, .two a {
+  color: #333;
+  padding-inline: 1rem;
+}
+
+.social {
+  padding-block: 2rem;
+  font-size: 4rem;
+}
+
+.social > * a {
+  color: #333;
+}
+
+.social > * {
+  -webkit-padding-end: 2rem;
+          padding-inline-end: 2rem;
+}
+
+.social > *:hover > * > * {
+  -webkit-transform: rotateY(360deg);
+          transform: rotateY(360deg);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.fb:hover .fa-facebook {
+  color: #4267B2;
+}
+
+.insta:hover .fa-instagram {
+  color: #E1306C;
+}
+
+.wa:hover .fa-whatsapp {
+  color: #4AC959;
+}
+
+.git:hover .fa-github {
+  color: #333;
+}
+
+.twt:hover .fa-twitter {
+  color: #1DA1F2;
+}
+
+.lin:hover .fa-linkedin {
+  color: #2867B2;
+}
+
+.contactext {
+  font-size: 2rem;
+  padding-bottom: 2rem;
+}
+
+.contact-image {
+  max-width: clamp(300px, 50vw, 450px);
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.alert-window-container {
+  position: fixed;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
+  z-index: -10000;
+  background-color: rgba(85, 85, 85, 0.5);
+  opacity: 0;
+}
+
+.alert-window {
+  position: relative;
+  border-radius: 20px;
+  height: 60vh;
+  width: 60vw;
+  max-width: 900px;
+  max-height: 600px;
+  background-color: #f8c0c0;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+}
+
+.alert-window .alert-head {
+  background-color: #fa8c8c;
+  position: relative;
+  height: clamp(50px, 15%, 75px);
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 700;
+  color: #fa0000;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.alert-window .close-alert {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+}
+
+.alert-window .alert-content {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  height: 80%;
+  width: 80%;
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+  color: #444;
+}
+
+.alert-window--activate {
+  opacity: 1;
+  z-index: 10000;
+  -webkit-transition: all 1s ease-in;
+  transition: all 1s ease-in;
+}
+
 @media screen and (max-width: 1024px) {
   .navbar__items {
     position: absolute;
@@ -611,13 +783,5 @@ section::-webkit-scrollbar {
   .form {
     width: 250px;
   }
-}
-
-.animateOnLoad {
-  -webkit-transform: translateY(0%);
-          transform: translateY(0%);
-  opacity: 1;
-  -webkit-transition: all 0.8s ease-out;
-  transition: all 0.8s ease-out;
 }
 /*# sourceMappingURL=main.css.map */
