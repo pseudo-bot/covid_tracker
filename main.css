@@ -340,33 +340,6 @@ section::-webkit-scrollbar {
   transition: all 0.5s ease-out;
 }
 
-.form .label--states::before {
-  content: "Currently available only for India";
-  font-size: 1.5rem;
-  color: #fff;
-  display: -ms-grid;
-  display: grid;
-  place-items: center;
-  height: 40px;
-  min-width: 300px;
-  position: absolute;
-  background-color: #f85454;
-  bottom: -60%;
-  left: 50%;
-  -webkit-transform: translate(-50%);
-          transform: translate(-50%);
-  border-radius: 100vw;
-  opacity: 0;
-  -webkit-transition: all 0.8s ease;
-  transition: all 0.8s ease;
-}
-
-.form .india-notselected::before {
-  opacity: 1;
-  -webkit-transition: all 0.8s ease;
-  transition: all 0.8s ease;
-}
-
 .form-btn {
   display: -ms-grid;
   display: grid;
@@ -397,10 +370,9 @@ section::-webkit-scrollbar {
           box-shadow: 0 0 10px #555;
 }
 
-#global {
+#country, #global {
   position: relative;
   bottom: 70px;
-  background-color: red;
 }
 
 .chart-container {
@@ -461,14 +433,17 @@ section::-webkit-scrollbar {
   font-size: 2.2rem;
   font-family: "poppins";
   font-weight: 600;
+  margin-block: 5px;
 }
 
 .info .info__data {
   font-size: 2rem;
+  margin-block: 5px;
 }
 
 .info .info__subtitle {
   font-size: 1.8rem;
+  margin-block: 5px;
 }
 
 .total_cases, .graph-confirm {
@@ -541,6 +516,22 @@ section::-webkit-scrollbar {
   }
   .heading {
     font-size: 5rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .info {
+    width: 150px;
+    min-height: 100px;
+  }
+  .info .info__title {
+    font-size: 1.8rem;
+  }
+  .info .info__data {
+    font-size: 1.6rem;
+  }
+  .info .info__subtitle {
+    font-size: 1.4rem;
   }
 }
 

@@ -72,27 +72,13 @@
 					<label for="country">
 						<span class="label-content">Country</span>
 					</label>
-					<datalist id="country"> </datalist>
+					<datalist id="country"></datalist>
 				</div>
 
-				<div class="form form__states">
-					<input
-						type="text"
-						name="states"
-						class="input--states input"
-						autocomplete="off"
-						list="states"
-						readonly
-						required
-					/>
-					<label for="states" class="label--states">
-						<span class="label-content label-content--states">State</span>
-					</label>
-					<datalist id="states"></datalist>
-				</div>
+				<!--  -->
 
 				<div class="form-btn">
-					<span class="track-btn">Track</span>
+					<a href="#gotocountry"><span class="track-btn">Track</span></a>
 				</div>
 
 				<div class="form-btn">
@@ -122,8 +108,10 @@
 			</div>
 		</section>
 
+		<div id="gotocountry"></div>
+
 		<section class="country_section">
-			<div class="country-chart-container">
+			<div class="country-chart-container chart-container">
 				<canvas id="country-chart"></canvas>
 			</div>
 
