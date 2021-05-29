@@ -28,6 +28,12 @@ function convertDate(date) {
 	return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 
+async function checkAPI(url) {
+	const response = await fetch(url);
+	const data = await response.json();
+	console.log(data);
+}
+
 async function dataSummary() {
 	// API for fetching world data
 	const response = await fetch("https://api.covid19api.com/summary");
@@ -38,7 +44,9 @@ async function dataSummary() {
 async function obtainSlug(country) {
 	const response = await dataSummary();
 	countryArr = response.Countries;
-	let slugIndex = countryArr.findIndex(element => element.Country.toLowerCase() === country.toLowerCase())
+	let slugIndex = countryArr.findIndex(
+		(element) => element.Country.toLowerCase() === country.toLowerCase()
+	);
 	return countryArr[slugIndex].Slug;
 }
 
@@ -71,7 +79,7 @@ async function dataLiveStates() {
 		break;
 	}
 
-	let state = values.filter(element => element.Province === 'Karnataka');
+	let state = values.filter((element) => element.Province === "Karnataka");
 	// console.log(values);
 
 	return values;
@@ -129,14 +137,14 @@ function populateRetrievedData(data, mod) {
 
 	let sign;
 
-	if (data.NewConfirmed - data.NewRecovered < 0) sign = 'down';
-	else sign = 'up';
+	if (data.NewConfirmed - data.NewRecovered < 0) sign = "down";
+	else sign = "up";
 
 	document.querySelector(
 		`.total_active${mod}`
 	).innerHTML = `<span class="info__title">Active</span><span class="info__data">${
 		data.TotalConfirmed - data.TotalRecovered
-	}</span><span class="new_active info__subtitle"><i class='fa fas fa-angle-double-{sign}'></i> ${
+	}</span><span class="new_active info__subtitle"><i class='fa fas fa-angle-double-${sign}'></i> ${
 		-data.NewConfirmed + data.NewRecovered
 	}</span>`;
 
@@ -150,8 +158,8 @@ async function populateGlobal() {
 
 	const global_today_response = await dataSummary();
 	const global_today = global_today_response.Global;
-	
-	populateRetrievedData(global_today, 'G');
+
+	populateRetrievedData(global_today, "G");
 	// loader.classList.remove('loading-screen')
 }
 
@@ -170,16 +178,15 @@ function clearElement(element) {
 	}
 }
 
-
 // Plotting Graphs
 
 async function plotGlobalData(dataToGraph = "TotalConfirmed") {
-	loader.classList.add('loading-screen');
+	loader.classList.add("loading-screen");
 
 	let date = [];
 	let ylable = [];
 	let label;
-	let color;
+	let color, bgcolor;
 
 	const globalResponse = await fetch(`https://api.covid19api.com/world`);
 	const globalData = await globalResponse.json();
@@ -198,38 +205,49 @@ async function plotGlobalData(dataToGraph = "TotalConfirmed") {
 	if (dataToGraph === "TotalConfirmed") {
 		label = "Confirmed Cases";
 		color = "#64b9f5";
+		bgcolor = "#bce3ff";
 	}
 
 	if (dataToGraph === "TotalRecovered") {
 		label = "Total Recovered";
 		color = "#86f093";
+		bgcolor = "#cef1d1";
 	}
 	if (dataToGraph === "TotalDeaths") {
 		label = "Deaths";
 		color = "#ff8a8a";
+		bgcolor = "#f7dddd";
 	}
 	if (dataToGraph === "active") {
 		label = "Active Cases";
 		color = "#f7b879";
+		bgcolor = "#f9fab7";
 	}
 
-	plot(date, ylable, label, color, "global-chart");
+	plot(date, ylable, label, color, bgcolor, "global-chart");
 
-	loader.classList.remove('loading-screen');
+	loader.classList.remove("loading-screen");
 }
 
-function plot(xdata, ydata, label, color, chartContainer) {
-    document.querySelector(`.${chartContainer}-container`).innerHTML = `<canvas id="global-chart"></canvas>`;
+function plot(xdata, ydata, label, color, bgcolor, chartContainer) {
+	document.querySelector(
+		`.${chartContainer}-container`
+	).innerHTML = `<canvas id="global-chart"></canvas>`;
 	let chart = document.getElementById(chartContainer).getContext("2d");
 	let chartDetails = new Chart(chart, {
-		type: "bar",
+		type: "line",
 		data: {
 			labels: xdata,
 			datasets: [
 				{
 					label: label,
 					data: ydata,
-					backgroundColor: color,
+					backgroundColor: bgcolor,
+					pointRadius: 0,
+					borderColor: color,
+					borderWidth: 2.502,
+					pointHoverRadius: 6,
+					fill: true,
 				},
 			],
 		},
@@ -242,54 +260,56 @@ function plot(xdata, ydata, label, color, chartContainer) {
 // Graph Call functions
 
 const graphConfirm = document.querySelector(".graph-confirm");
-const graphRecover = document.querySelector('.graph-recover');
+const graphRecover = document.querySelector(".graph-recover");
 const graphDeaths = document.querySelector(".graph-deaths");
 const graphActive = document.querySelector(".graph-active");
 
-graphConfirm.addEventListener('click', () => {
-    
-    plotGlobalData('TotalConfirmed');
-})
+graphConfirm.addEventListener("click", () => {
+	plotGlobalData("TotalConfirmed");
+});
 
 graphRecover.addEventListener("click", () => {
-    plotGlobalData('TotalRecovered');
-})
+	plotGlobalData("TotalRecovered");
+});
 
-graphDeaths.addEventListener('click', () => {
-    plotGlobalData('TotalDeaths');
-})
+graphDeaths.addEventListener("click", () => {
+	plotGlobalData("TotalDeaths");
+});
 
-graphActive.addEventListener('click', () => {
-    plotGlobalData('active');
-})
+graphActive.addEventListener("click", () => {
+	plotGlobalData("active");
+});
 
-// let graphGlobal = ['TotalConfirmed', 'TotalRecovered', 'active', 'TotalDeaths']
-// let graphGlobalIndex = 1;
+// Geolocation
 
-// function autoPlotGlobal() {
-// 	if (graphGlobalIndex == graphGlobal.length) {
-// 		graphGlobalIndex = 0;
-// 	}
-// 	plotGlobalData(graphGlobal[graphGlobalIndex]);
-// 	graphGlobalIndex++;
-// }
+async function reverseGeolocate(lat, long) {
+	const response = await fetch(
+		`http://api.positionstack.com/v1/reverse
+		?access_key=6a287bd91465208084c6888f04161e81&query=${lat},${long}
+		`
+	);
+	const data = await response.json();
+	console.log(data);
+}
 
-// setInterval(() => {
-// 	autoPlotGlobal();
-// }, 9000);
+navigator.geolocation.getCurrentPosition((position) => {
+	console.log(position.coords.latitude, position.coords.latitude);
+	reverseGeolocate(position.coords.latitude, position.coords.latitude);
+});
+
+//  Execute at startup
 
 const execute = () => {
 	populateCountry();
 	populateGlobal();
-    plotGlobalData();
+	plotGlobalData();
 };
 
-this.addEventListener('load', () => {
-    setTimeout(() => {
-        document.querySelector(".load").classList.remove('loading-screen');
-    document.querySelector(".load").classList.remove('load-start-bg');
-    }, 2000);
-})
+this.addEventListener("load", () => {
+	setTimeout(() => {
+		document.querySelector(".load").classList.remove("loading-screen");
+		document.querySelector(".load").classList.remove("load-start-bg");
+	}, 2000);
+});
 
 execute();
-

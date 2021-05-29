@@ -415,7 +415,7 @@ section::-webkit-scrollbar {
   height: 100%;
 }
 
-.global_data {
+.data {
   position: relative;
   width: 90%;
   display: -webkit-box;
