@@ -378,8 +378,9 @@ section::-webkit-scrollbar {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .form-btn {
@@ -389,7 +390,8 @@ section::-webkit-scrollbar {
 }
 
 .track-btn,
-.global-btn {
+.global-btn,
+.search-btn {
   font-size: 1.6rem;
   font-family: "Montserrat";
   font-weight: 500;
@@ -412,7 +414,8 @@ section::-webkit-scrollbar {
           box-shadow: 0 0 10px #555;
 }
 
-#gotocountry, #global {
+#gotocountry,
+#global, #states {
   position: relative;
   bottom: 70px;
 }
@@ -433,7 +436,8 @@ section::-webkit-scrollbar {
   margin-top: 100px;
 }
 
-.country-name, .global-name {
+.country-name,
+.global-name, .states-name {
   height: 100px;
   display: -ms-grid;
   display: grid;
@@ -509,28 +513,36 @@ section::-webkit-scrollbar {
   margin-block: 5px;
 }
 
-.total_cases, .graph-confirm {
+.total_cases,
+.graph-confirm {
   background-color: #bce3ff;
   border-radius: 10px;
   color: #3461f5;
 }
 
-.total_recovered, .graph-recover {
+.total_recovered,
+.graph-recover {
   background-color: #cef1d1;
   border-radius: 10px;
   color: #03ac2d;
 }
 
-.total_active, .graph-active {
+.total_active,
+.graph-active {
   background-color: #f9fab7;
   border-radius: 10px;
   color: #dd6d05;
 }
 
-.total_deaths, .graph-deaths {
+.total_deaths,
+.graph-deaths {
   background-color: #f7dddd;
   border-radius: 10px;
   color: #fc2727;
+}
+
+.states_section {
+  display: none;
 }
 
 @media screen and (max-width: 1024px) {

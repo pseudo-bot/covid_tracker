@@ -6,6 +6,7 @@ const labelStates = document.querySelector(".label--states");
 const loader = document.querySelector(".load");
 
 let slugValue = "india";
+let stateName;
 
 function menu() {
 	const menubar = document.querySelector(".menubar");
@@ -78,6 +79,23 @@ function dataRepresentation(data, mod) {
 	).innerHTML = `<span class="info__title">Deaths</span><span class="info__data">${data.TotalDeaths}</span><span class="new_deaths info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${data.NewDeaths}</span>`;
 }
 
+function dataRepresentationStates(data, mod) {
+	document.querySelector(
+		`.total_cases${mod}`
+	).innerHTML = `<span class="info__title">Confirmed</span><span class="info__data">${data.Confirmed}</span>`;
+	document.querySelector(
+		`.total_recovered${mod}`
+	).innerHTML = `<span class="info__title">Recovered</span><span class="info__data">${data.Recovered}</span>`;
+
+	document.querySelector(
+		`.total_active${mod}`
+	).innerHTML = `<span class="info__title">Active</span><span class="info__data">${data.Active}</span>`;
+
+	document.querySelector(
+		`.total_deaths${mod}`
+	).innerHTML = `<span class="info__title">Deaths</span><span class="info__data">${data.Deaths}</span>`;
+}
+
 function clearElement(element) {
 	while (element.firstChild) {
 		element.removeChild(element.firstChild);
@@ -107,6 +125,17 @@ async function populateCountryData(input = "India") {
 	}
 
 	dataRepresentation(data, "C");
+}
+
+async function populateStatesData() {
+	loader.classList.add("loading-screen");
+
+	const response = await fetch('https://api.covid19api.com/live/country/india');
+	const data = await response.json();
+	const stateData = data.filter(element => element.Province.toLowerCase() === stateName.toLowerCase())
+	
+	dataRepresentationStates(stateData[stateData.length - 1], "S")
+	loader.classList.remove("loading-screen");
 }
 
 // Plotting Graphs
@@ -208,6 +237,51 @@ async function plotCountryData(dataToGraph = "Confirmed", slug = "india") {
 	loader.classList.remove("loading-screen");
 }
 
+async function plotStatesData(dataToGraph="Confirmed") {
+	loader.classList.add("loading-screen");
+
+	let date = [];
+	let ylable = [];
+	let label;
+	let color, bgcolor;
+
+	const response = await fetch('https://api.covid19api.com/live/country/india');
+	const data = await response.json();
+	const stateData = data.filter(element => element.Province.toLowerCase() === stateName.toLowerCase())
+
+	for (let values of stateData) {
+		let dateToPush = values.Date.substr(0, 10);
+		date.push(dateToPush);
+		ylable.push(values[dataToGraph]);
+	}
+
+	if (dataToGraph === "Confirmed") {
+		label = "Confirmed Cases";
+		color = "#64b9f5";
+		bgcolor = "#bce3ff";
+	}
+
+	if (dataToGraph === "Recovered") {
+		label = "Total Recovered";
+		color = "#86f093";
+		bgcolor = "#cef1d1";
+	}
+	if (dataToGraph === "Deaths") {
+		label = "Deaths";
+		color = "#ff8a8a";
+		bgcolor = "#f7dddd";
+	}
+	if (dataToGraph === "Active") {
+		label = "Active Cases";
+		color = "#f7b879";
+		bgcolor = "#f9fab7";
+	}
+
+	plot(date, ylable, label, color, bgcolor, "states-chart");
+
+	loader.classList.remove("loading-screen");
+}
+
 async function check() {
 	const res = await fetch("https://api.covid19api.com/live/country/india");
 	const data = await res.json();
@@ -285,6 +359,11 @@ async function reverseGeolocate(lat, long) {
 		`
 	);
 	const data = await response.json();
+	stateName = data.address.state;
+	document.querySelector('.states-name').innerHTML = stateName;
+
+	await populateStatesData(stateName);
+	plotStatesData();
 }
 
 function getlocation() {
@@ -299,7 +378,6 @@ function getlocation() {
 	}
 }
 
-getlocation();
 
 //  Execute at Startup
 
@@ -353,8 +431,13 @@ this.addEventListener("load", () => {
 // 	}
 // });
 
-document.querySelector(".track-btn").addEventListener("click", async () => {
+document.querySelector(".search-btn").addEventListener("click", async () => {
 	populateCountryData(inputCountry.value);
 	slugValue = await obtainSlug(inputCountry.value);
 	plotCountryData("Confirmed", slugValue);
 });
+
+document.querySelector('.track-btn').addEventListener("click", () => {
+	document.querySelector('.states_section').style.display = 'flex';
+	getlocation();
+})
