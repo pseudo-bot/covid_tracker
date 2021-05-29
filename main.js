@@ -140,7 +140,7 @@ async function populateStatesData() {
 	dataRepresentationStates(stateData[stateData.length - 1], "S");
 	loader.classList.remove("loading-screen");
 
-	if (stateData[stateData.length - 1].Active > 10000) {
+	if (stateData[stateData.length - 1].Active > 20000) {
 		document
 			.querySelector(".alert-window-container")
 			.classList.add("alert-window--activate");
@@ -414,32 +414,6 @@ this.addEventListener("load", () => {
 		document.querySelector(".load").classList.remove("load-start-bg");
 	}, 2000);
 });
-
-// inputState.addEventListener("click", () => {
-// 	if (inputCountry.value.toLowerCase() !== "india") {
-// 		labelStates.classList.add("india-notselected");
-// 		setTimeout(() => {
-// 			labelStates.classList.remove("india-notselected");
-// 		}, 2500);
-// 	}
-// });
-
-// inputCountry.addEventListener("change", () => {
-// 	if (inputCountry.value.toLowerCase() === "india") {
-// 		populateStates();
-// 	} else {
-// 		clearElement(states);
-// 	}
-// });
-
-// inputState.addEventListener("click", () => {
-// 	if (inputCountry.value.toLowerCase() === "india") {
-// 		inputState.removeAttribute("readonly");
-// 	} else {
-// 		inputState.value = "";
-// 		inputState.setAttribute("readonly", "");
-// 	}
-// });
 
 document.querySelector(".search-btn").addEventListener("click", async () => {
 	populateCountryData(inputCountry.value);
