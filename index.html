@@ -36,13 +36,13 @@
 
 	<body>
 		<nav class="navbar">
-			<div class="logo">Covid</div>
+			<div class="logo">Covid19</div>
 
 			<ul class="navbar__items">
 				<li><a href="#">Home</a></li>
-				<li><a href="#">About</a></li>
+				<li><a href="#global">Global</a></li>
+				<li><a href="#gotocountry">Country</a></li>
 				<li><a href="#">Contact</a></li>
-				<li><a href="#">Help</a></li>
 			</ul>
 
 			<div class="menubar">
@@ -75,14 +75,32 @@
 					<datalist id="country"></datalist>
 				</div>
 
-				<!--  -->
+				<!-- <div class="form form__states">
+					<input
+						type="text"
+						name="states"
+						class="input--states input"
+						autocomplete="off"
+						list="states"
+						readonly
+						required
+					/>
+					<label for="states" class="label--states">
+						<span class="label-content label-content--states">State</span>
+					</label>
+					<datalist id="states"></datalist>
+				</div> -->
 
-				<div class="form-btn">
-					<a href="#gotocountry"><span class="track-btn">Track</span></a>
-				</div>
-
-				<div class="form-btn">
-					<a href="#global"><span class="global-btn">Global Data</span></a>
+				<div class="buttons">
+					<div class="form-btn">
+						<a href="#gotocountry"><span class="track-btn">Search</span></a>
+					</div>
+					<div class="form-btn">
+						<a href="#global"><span class="global-btn">Global Data</span></a>
+					</div>
+					<div class="form-btn">
+						<a href="#global"><span class="global-btn">Track Me</span></a>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -96,6 +114,7 @@
 		<div id="global"></div>
 
 		<section class="global_section">
+			<div class="global-name">GLOBAL</div>
 			<div class="global-chart-container chart-container">
 				<canvas id="global-chart"></canvas>
 			</div>
@@ -111,6 +130,7 @@
 		<div id="gotocountry"></div>
 
 		<section class="country_section">
+			<div class="country-name">India</div>
 			<div class="country-chart-container chart-container">
 				<canvas id="country-chart"></canvas>
 			</div>

@@ -2,6 +2,7 @@ const country = document.querySelector("#country");
 const states = document.querySelector("#states");
 const inputCountry = document.querySelector(".input--country");
 const inputState = document.querySelector(".input--states");
+const labelStates = document.querySelector(".label--states");
 const loader = document.querySelector(".load");
 
 let slugValue = "india";
@@ -29,12 +30,13 @@ async function dataSummary() {
 	return values;
 }
 
-async function obtainSlug(country) {
+async function obtainSlug(country="India") {
 	const response = await dataSummary();
 	countryArr = response.Countries;
 	let slugIndex = countryArr.findIndex(
 		(element) => element.Country.toLowerCase() === country.toLowerCase()
 	);
+	document.querySelector('.country-name').innerHTML = countryArr[slugIndex].Country;
 	return countryArr[slugIndex].Slug;
 }
 // Search functions
@@ -325,23 +327,31 @@ this.addEventListener("load", () => {
 	}, 2000);
 });
 
+// inputState.addEventListener("click", () => {
+// 	if (inputCountry.value.toLowerCase() !== "india") {
+// 		labelStates.classList.add("india-notselected");
+// 		setTimeout(() => {
+// 			labelStates.classList.remove("india-notselected");
+// 		}, 2500);
+// 	}
+// });
 
-inputCountry.addEventListener("change", () => {
-	if (inputCountry.value.toLowerCase() === "india") {
-		populateStates();
-	} else {
-		clearElement(states);
-	}
-});
+// inputCountry.addEventListener("change", () => {
+// 	if (inputCountry.value.toLowerCase() === "india") {
+// 		populateStates();
+// 	} else {
+// 		clearElement(states);
+// 	}
+// });
 
-inputState.addEventListener("click", () => {
-	if (inputCountry.value.toLowerCase() === "india") {
-		inputState.removeAttribute("readonly");
-	} else {
-		inputState.value = "";
-		inputState.setAttribute("readonly", "");
-	}
-});
+// inputState.addEventListener("click", () => {
+// 	if (inputCountry.value.toLowerCase() === "india") {
+// 		inputState.removeAttribute("readonly");
+// 	} else {
+// 		inputState.value = "";
+// 		inputState.setAttribute("readonly", "");
+// 	}
+// });
 
 document.querySelector(".track-btn").addEventListener("click", async () => {
 	populateCountryData(inputCountry.value);
