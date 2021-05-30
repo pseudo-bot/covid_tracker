@@ -215,6 +215,7 @@ section {
           align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  border-radius: 20px;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
