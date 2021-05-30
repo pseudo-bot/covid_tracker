@@ -4,6 +4,7 @@ const inputCountry = document.querySelector(".input--country");
 const inputState = document.querySelector(".input--states");
 const labelStates = document.querySelector(".label--states");
 const loader = document.querySelector(".load");
+const num = new Intl.NumberFormat('en-US')
 
 let slugValue = "india";
 let stateName;
@@ -57,10 +58,10 @@ async function populateCountry() {
 function dataRepresentation(data, mod) {
 	document.querySelector(
 		`.total_cases${mod}`
-	).innerHTML = `<span class="info__title">Confirmed</span><span class="info__data">${data.TotalConfirmed}</span><span class="new_cases info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${data.NewConfirmed}</span>`;
+	).innerHTML = `<span class="info__title">Confirmed</span><span class="info__data">${num.format(data.TotalConfirmed)}</span><span class="new_cases info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${num.format(data.NewConfirmed)}</span>`;
 	document.querySelector(
 		`.total_recovered${mod}`
-	).innerHTML = `<span class="info__title">Recovered</span><span class="info__data">${data.TotalRecovered}</span><span class="new_recovered info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${data.NewRecovered}</span>`;
+	).innerHTML = `<span class="info__title">Recovered</span><span class="info__data">${num.format(data.TotalRecovered)}</span><span class="new_recovered info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${num.format(data.NewRecovered)}</span>`;
 
 	let sign;
 	let av = data.NewConfirmed - data.NewRecovered;
@@ -72,29 +73,29 @@ function dataRepresentation(data, mod) {
 	document.querySelector(
 		`.total_active${mod}`
 	).innerHTML = `<span class="info__title">Active</span><span class="info__data">${
-		data.TotalConfirmed - data.TotalRecovered
-	}</span><span class="new_active info__subtitle"><i class='fa fas fa-angle-double-${sign}'></i> ${av}</span>`;
+		num.format(data.TotalConfirmed - data.TotalRecovered)
+	}</span><span class="new_active info__subtitle"><i class='fa fas fa-angle-double-${sign}'></i> ${num.format(av)}</span>`;
 
 	document.querySelector(
 		`.total_deaths${mod}`
-	).innerHTML = `<span class="info__title">Deaths</span><span class="info__data">${data.TotalDeaths}</span><span class="new_deaths info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${data.NewDeaths}</span>`;
+	).innerHTML = `<span class="info__title">Deaths</span><span class="info__data">${num.format(data.TotalDeaths)}</span><span class="new_deaths info__subtitle"><i class='fa fas fa-angle-double-up'></i> ${num.format(data.NewDeaths)}</span>`;
 }
 
 function dataRepresentationStates(data, mod) {
 	document.querySelector(
 		`.total_cases${mod}`
-	).innerHTML = `<span class="info__title">Confirmed</span><span class="info__data">${data.Confirmed}</span>`;
+	).innerHTML = `<span class="info__title">Confirmed</span><span class="info__data">${num.format(data.Confirmed)}</span>`;
 	document.querySelector(
 		`.total_recovered${mod}`
-	).innerHTML = `<span class="info__title">Recovered</span><span class="info__data">${data.Recovered}</span>`;
+	).innerHTML = `<span class="info__title">Recovered</span><span class="info__data">${num.format(data.Recovered)}</span>`;
 
 	document.querySelector(
 		`.total_active${mod}`
-	).innerHTML = `<span class="info__title">Active</span><span class="info__data">${data.Active}</span>`;
+	).innerHTML = `<span class="info__title">Active</span><span class="info__data">${num.format(data.Active)}</span>`;
 
 	document.querySelector(
 		`.total_deaths${mod}`
-	).innerHTML = `<span class="info__title">Deaths</span><span class="info__data">${data.Deaths}</span>`;
+	).innerHTML = `<span class="info__title">Deaths</span><span class="info__data">${num.format(data.Deaths)}</span>`;
 }
 
 function clearElement(element) {
