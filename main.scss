@@ -135,8 +135,8 @@ a {
 	transform: translateY(-50%);
 
 	& > * {
-		border: 2px solid #777;
-		height: 0;
+		background-color: #777;
+		height: 4px;
 		margin-block: 3px;
 		border-radius: 100vw;
 		transition: all 0.4s ease;

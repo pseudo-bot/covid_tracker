@@ -144,8 +144,8 @@ a {
 }
 
 .menubar > * {
-  border: 2px solid #777;
-  height: 0;
+  background-color: #777;
+  height: 4px;
   margin-block: 3px;
   border-radius: 100vw;
   -webkit-transition: all 0.4s ease;
