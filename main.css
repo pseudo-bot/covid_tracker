@@ -555,10 +555,10 @@ section::-webkit-scrollbar {
 
 .socialbar {
   height: 350px;
-  width: 60px;
+  width: 55px;
   position: fixed;
   top: 50%;
-  left: -60px;
+  left: -55px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   display: -webkit-box;
@@ -572,8 +572,8 @@ section::-webkit-scrollbar {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   font-size: 4rem;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#4b83fa), to(#c504c5));
-  background-image: linear-gradient(to bottom, #4b83fa, #c504c5);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3b78fc), to(#8f028f));
+  background-image: linear-gradient(to bottom, #3b78fc, #8f028f);
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -598,7 +598,7 @@ section::-webkit-scrollbar {
 .socialbar .socialbar-btn {
   width: 40px;
   height: 50px;
-  background: #8748fc;
+  background: #7a35fa;
   position: absolute;
   right: -40px;
   border-radius: 0 100% 100% 0;

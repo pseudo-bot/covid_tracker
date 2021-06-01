@@ -490,10 +490,10 @@ section {
 
 .socialbar {
 	height: 350px;
-	width: 60px;
+	width: 55px;
 	position: fixed;
 	top: 50%;
-	left: -60px;
+	left: -55px;
 	transform: translateY(-50%);
 	display: flex;
 	flex-direction: column;
@@ -501,8 +501,8 @@ section {
 	font-size: 4rem;
 	background-image: linear-gradient(
 		to bottom,
-		rgb(75, 131, 250),
-		rgb(197, 4, 197)
+		rgb(59, 120, 252),
+		rgb(143, 2, 143)
 	);
 	align-items: center;
 	border-radius: 0 30px 30px 0;
@@ -523,7 +523,7 @@ section {
 	.socialbar-btn {
 		width: 40px;
 		height: 50px;
-		background: rgb(135, 72, 252);
+		background: rgb(122, 53, 250);
 		position: absolute;
 		right: -40px;
 		border-radius: 0 100% 100% 0;
