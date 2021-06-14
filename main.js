@@ -464,15 +464,9 @@ async function reverseGeolocate(lat, long) {
 }
 
 function getlocation() {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition((position) => {
-			reverseGeolocate(position.coords.latitude, position.coords.longitude);
-		});
-	} else {
-		alert(
-			"Your browser doesn't support geolocation or has been disabled by the user."
-		);
-	}
+	navigator.geolocation.getCurrentPosition((position) => {
+		reverseGeolocate(position.coords.latitude, position.coords.longitude);
+	});
 }
 
 //  Execute at Startup
@@ -524,8 +518,15 @@ document.querySelector('.search-btn').addEventListener('click', async () => {
 document.querySelector('.track-btn').addEventListener('click', async () => {
 	loader.classList.add('loading-screen');
 
-	document.querySelector('.states_section').style.display = 'flex';
-	await getlocation();
+	if (Object.entries(navigator.geolocation).length !== 0) {
+		document.querySelector('.states_section').style.display = 'flex';
+		await getlocation();
+	} else {
+		alert(
+			"Your browser doesn't support geolocation or has been disabled by the user."
+		);
+	}
+
 	loader.classList.remove('loading-screen');
 });
 
