@@ -463,10 +463,15 @@ async function reverseGeolocate(lat, long) {
 	plotStatesData('Confirmed', userState, 'india', 'states-chart');
 }
 
+function locationError() {
+	alert('Location services are not supported or has been disabled by the user.')
+}
+
 function getlocation() {
 	navigator.geolocation.getCurrentPosition((position) => {
+		window.location.href = '#states';
 		reverseGeolocate(position.coords.latitude, position.coords.longitude);
-	});
+	}, locationError);
 }
 
 //  Execute at Startup
@@ -517,14 +522,11 @@ document.querySelector('.search-btn').addEventListener('click', async () => {
 
 document.querySelector('.track-btn').addEventListener('click', async () => {
 	loader.classList.add('loading-screen');
-
-	if (Object.entries(navigator.geolocation).length !== 0) {
+	if (!navigator.geolocation) {
+		alert('Your browser does not support location services.');
+	} else {
 		document.querySelector('.states_section').style.display = 'flex';
 		await getlocation();
-	} else {
-		alert(
-			"Your browser doesn't support geolocation or has been disabled by the user."
-		);
 	}
 
 	loader.classList.remove('loading-screen');
