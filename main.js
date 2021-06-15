@@ -469,6 +469,7 @@ function locationError() {
 
 function getlocation() {
 	navigator.geolocation.getCurrentPosition((position) => {
+		document.querySelector('.states_section').style.display = 'flex';
 		window.location.href = '#states';
 		reverseGeolocate(position.coords.latitude, position.coords.longitude);
 	}, locationError);
@@ -476,7 +477,7 @@ function getlocation() {
 
 //  Execute at Startup
 
-const execute = async () => {
+const execute = () => {
 	populateCountry();
 	populateGlobalData();
 	plotGlobalData();
@@ -521,15 +522,11 @@ document.querySelector('.search-btn').addEventListener('click', async () => {
 });
 
 document.querySelector('.track-btn').addEventListener('click', async () => {
-	loader.classList.add('loading-screen');
 	if (!navigator.geolocation) {
 		alert('Your browser does not support location services.');
 	} else {
-		document.querySelector('.states_section').style.display = 'flex';
-		await getlocation();
+		getlocation();
 	}
-
-	loader.classList.remove('loading-screen');
 });
 
 document
