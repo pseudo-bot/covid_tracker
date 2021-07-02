@@ -8,7 +8,7 @@ API
 
 HTML, JavaScript, SASS, CSS
 
-### Milestones achieved:
+### Features:
 
     - Fetched world data (total, recovered, active, death cases along with increments)
     - Fetched coordinates and representing data of the location
